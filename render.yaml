@@ -1,0 +1,12 @@
+# Render Blueprint Specification for Static Site
+# Deploy free on https://render.com
+services:
+  - type: web
+    name: vldc2-handbook
+    env: static
+    buildCommand: ""
+    staticPublishPath: ./
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600

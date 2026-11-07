@@ -1,0 +1,2353 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Tay Tổng Hợp & Công Thức Ôn Thi VLDC2 (PH1120)</title>
+    
+    <!-- Cấu hình MathJax 3 cho hiển thị công thức toán sắc nét -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #eff6ff;
+            --primary-dark: #1e3a8a;
+            --secondary: #0d9488;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --danger-border: #f87171;
+            --warning: #b45309;
+            --warning-bg: #fffbeb;
+            --warning-border: #fbbf24;
+            --text-main: #18181b;
+            --text-muted: #52525b;
+            --border-color: #e4e4e7;
+            --bg-page: #f4f4f5;
+            --bg-card: #ffffff;
+            --sidebar-width: 290px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Top Bar with Realtime Search & Category Filters */
+        .top-navbar {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            border-bottom: 2px solid var(--border-color);
+            padding: 12px 24px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .search-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-box-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #71717a;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 10px 14px 10px 38px;
+            font-size: 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        #searchInput:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+        }
+
+        .search-stats {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .pill-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .pill-btn:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        .pill-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Layout Structure */
+        .layout-container {
+            display: flex;
+            max-width: 1360px;
+            margin: 20px auto;
+            padding: 0 20px;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        /* Sticky Sidebar TOC */
+        .sidebar-toc {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            position: sticky;
+            top: 135px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px 18px;
+            max-height: calc(100vh - 160px);
+            overflow-y: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .sidebar-toc h3 {
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        .sidebar-toc ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        .sidebar-toc li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .sidebar-toc a {
+            color: #334155;
+            text-decoration: none;
+            font-size: 13.5px;
+            display: block;
+            padding: 4px 6px;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+
+        .sidebar-toc a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .sidebar-toc .toc-sub {
+            padding-left: 12px;
+            font-size: 12.5px;
+            color: #64748b;
+        }
+
+        /* Main Content Container */
+        .main-content {
+            flex: 1;
+            background: #ffffff;
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            min-width: 0;
+        }
+
+        .scroll-target {
+            scroll-margin-top: 140px;
+        }
+
+        h1.chapter-header {
+            color: var(--primary-dark);
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 12px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        h2.sub-chapter-header {
+            color: #1e3a8a;
+            font-size: 20px;
+            font-weight: 650;
+            border-bottom: 1.5px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        h3.section-header {
+            color: #0f172a;
+            font-size: 17.5px;
+            font-weight: 600;
+            margin-top: 24px;
+        }
+
+        h4.sub-section-header {
+            color: #334155;
+            font-size: 15.5px;
+            font-weight: 600;
+            margin-top: 20px;
+            padding-left: 6px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        p, li {
+            font-size: 15px;
+            color: #27272a;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Vector SVG Diagram Styles */
+        .diagram-wrapper {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .physics-diagram {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .diagram-caption {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Alerts & Warnings */
+        .alert-box {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14.5px;
+        }
+
+        .alert-box p {
+            margin: 6px 0;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 14.5px;
+        }
+
+        .alert-caution {
+            background-color: var(--danger-bg);
+            border: 1.5px solid var(--danger-border);
+            color: #7f1d1d;
+        }
+        .alert-caution .alert-title { color: var(--danger); }
+
+        .alert-warning {
+            background-color: var(--warning-bg);
+            border: 1.5px solid var(--warning-border);
+            color: #78350f;
+        }
+        .alert-warning .alert-title { color: var(--warning); }
+
+        .alert-note {
+            background-color: #f0fdf4;
+            border: 1.5px solid #86efac;
+            color: #14532d;
+        }
+        .alert-note .alert-title { color: #15803d; }
+
+        .info-card {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 14.5px;
+            color: #1e3a8a;
+        }
+
+        .display-math {
+            overflow-x: auto;
+            padding: 10px 14px;
+            margin: 14px 0;
+            background: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        code {
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13.5px;
+            font-family: Consolas, Monaco, monospace;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating action buttons */
+        .floating-actions {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .action-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(30, 64, 175, 0.45);
+        }
+
+        .action-btn.btn-top {
+            background: #475569;
+            padding: 10px 14px;
+            align-self: flex-end;
+        }
+        .action-btn.btn-top:hover {
+            background: #1e293b;
+        }
+
+        /* Search Highlight (Does NOT interfere with MathJax) */
+        .highlight-match {
+            background-color: #fef08a !important;
+            color: #854d0e !important;
+            padding: 1px 3px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .hidden-by-filter {
+            display: none !important;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar-toc { display: none; }
+            .layout-container { padding: 0 10px; }
+            .main-content { padding: 25px 20px; }
+        }
+
+        @media print {
+            .top-navbar, .sidebar-toc, .floating-actions { display: none !important; }
+            body { background: white; padding: 0; }
+            .layout-container { max-width: 100%; margin: 0; padding: 0; }
+            .main-content { box-shadow: none; border: none; padding: 0; }
+        }
+    
+        /* --- DARK MODE PALETTE --- */
+        body.dark-mode {
+            --bg-page: #0b0f19;
+            --bg-card: #151d30;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #243049;
+            --primary: #3b82f6;
+            --primary-light: #1e293b;
+            --primary-dark: #60a5fa;
+            --danger-bg: #2d1519;
+            --danger-border: #991b1b;
+            --warning-bg: #2a1f0d;
+            --warning-border: #854d0e;
+        }
+
+        body.dark-mode .top-navbar,
+        body.dark-mode .sidebar-toc,
+        body.dark-mode .main-content,
+        body.dark-mode .drawer-panel {
+            background: #131b2e !important;
+            color: #f1f5f9 !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode .sidebar-toc h3,
+        body.dark-mode h1.chapter-header,
+        body.dark-mode h2.sub-chapter-header,
+        body.dark-mode h3.section-header,
+        body.dark-mode h4.sub-section-header {
+            color: #93c5fd !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode .sidebar-toc a {
+            color: #cbd5e1 !important;
+        }
+
+        body.dark-mode .sidebar-toc a:hover {
+            background: #1e293b !important;
+            color: #60a5fa !important;
+        }
+
+        body.dark-mode p, body.dark-mode li {
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode table {
+            background: #131b2e !important;
+        }
+
+        body.dark-mode th {
+            background-color: #1e293b !important;
+            color: #93c5fd !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode td {
+            border-color: #243049 !important;
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode tr:nth-child(even) {
+            background-color: #162035 !important;
+        }
+
+        body.dark-mode tr:hover {
+            background-color: #1c2842 !important;
+        }
+
+        body.dark-mode .display-math {
+            background: #0d1322 !important;
+            border-color: #243049 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode code {
+            background: #1e293b !important;
+            color: #38bdf8 !important;
+        }
+
+        body.dark-mode #searchInput {
+            background: #0d1322 !important;
+            color: #f8fafc !important;
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .pill-btn {
+            background: #1e293b !important;
+            color: #cbd5e1 !important;
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .pill-btn.active {
+            background: #2563eb !important;
+            color: #ffffff !important;
+            border-color: #2563eb !important;
+        }
+
+        body.dark-mode .info-card {
+            background: #172554 !important;
+            color: #bfdbfe !important;
+            border-left-color: #3b82f6 !important;
+        }
+
+        body.dark-mode .physics-diagram {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 6px;
+        }
+
+        body.dark-mode .note-textarea {
+            background: #0d1322 !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+
+        /* --- TOP BRAND & TOOLBAR ROW --- */
+        .brand-toolbar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto 6px auto;
+            width: 100%;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .brand-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            border: 1px solid #bae6fd;
+        }
+
+        body.dark-mode .brand-badge {
+            background: #0c4a6e;
+            color: #7dd3fc;
+            border-color: #0284c7;
+        }
+
+        .nav-tools {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tool-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: #f8fafc;
+            color: #334155;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        body.dark-mode .tool-btn {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-color: #334155;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary);
+            text-decoration: none;
+        }
+
+        .tool-btn.btn-danger-highlight {
+            background: #fef2f2;
+            color: #b91c1c;
+            border-color: #fca5a5;
+        }
+
+        body.dark-mode .tool-btn.btn-danger-highlight {
+            background: #361014;
+            color: #fca5a5;
+            border-color: #7f1d1d;
+        }
+
+        .tool-btn.btn-danger-highlight:hover {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-count {
+            background: var(--primary);
+            color: white;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* --- SLIDE-IN DRAWERS (NOTES & BOOKMARKS) --- */
+        .drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(2px);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .drawer-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 440px;
+            max-width: 90vw;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            z-index: 10001;
+            transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer-panel.active {
+            right: 0;
+        }
+
+        .drawer-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .drawer-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawer-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .drawer-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .drawer-footer {
+            padding: 12px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            background: rgba(0,0,0,0.02);
+        }
+
+        /* Note Tabs & Textareas */
+        .note-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .note-tab-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #475569;
+        }
+
+        body.dark-mode .note-tab-btn {
+            background: #1e293b;
+            border-color: #334155;
+            color: #cbd5e1;
+        }
+
+        .note-tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .note-textarea {
+            width: 100%;
+            height: 280px;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .note-textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .save-indicator {
+            font-size: 12px;
+            color: #10b981;
+            font-weight: 600;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Bookmark Cards in Drawer */
+        .bookmark-item {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.01);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+            transition: transform 0.15s ease;
+        }
+
+        .bookmark-item:hover {
+            transform: translateX(-2px);
+            border-color: var(--primary);
+        }
+
+        .bookmark-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .bookmark-title:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .bookmark-chap {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        .bookmark-del {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 2px 6px;
+            font-size: 14px;
+        }
+
+        /* Star Button in Main Content */
+        .star-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 8px;
+            vertical-align: middle;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        body.dark-mode .star-toggle-btn {
+            background: #1e293b;
+            border-color: #475569;
+        }
+
+        .star-toggle-btn.starred {
+            background: #fef08a;
+            border-color: #eab308;
+            color: #ca8a04;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Top Navigation Bar with Search & Category Filters -->
+<!-- Top Navigation Bar with Search, Drawers, Theme & Conflict Link -->
+<header class="top-navbar">
+    <div class="brand-toolbar-row">
+        <a href="index.html" class="brand-title">
+            <span>⚡ SỔ TAY VLDC2 (PH1120)</span>
+            <span class="brand-badge" title="Tất cả ghi chú và đánh dấu lưu trực tiếp trên trình duyệt của máy bạn, hoàn toàn độc lập và không bao giờ xung đột với máy khác.">💻 Máy Độc Lập</span>
+        </a>
+        <div class="nav-tools">
+            <a href="conflict-report.html" class="tool-btn btn-danger-highlight" title="Xem các điểm sai lệch, mâu thuẫn công thức giữa các bản tóm tắt cũ và hướng dẫn chuẩn mực">
+                ⚠️ Báo Cáo Xung Đột Công Thức
+            </a>
+            <button class="tool-btn" id="btnOpenBookmarks" title="Xem danh sách công thức & mục quan trọng đã đánh dấu sao">
+                ⭐ Đã lưu (<span id="bookmarkCount" class="badge-count">0</span>)
+            </button>
+            <button class="tool-btn" id="btnOpenNotes" title="Mở sổ tay ghi chú cá nhân của máy bạn">
+                📝 Ghi chú cá nhân
+            </button>
+            <button class="tool-btn" id="btnToggleTheme" title="Chuyển chế độ Sáng / Tối">
+                🌙 Giao diện Tối
+            </button>
+        </div>
+    </div>
+
+    <div class="search-row">
+        <div class="search-box-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Tìm kiếm nhanh: công thức, tụ trụ, mặt cầu, điện môi, công electron, bẫy thi..." autocomplete="off">
+        </div>
+        <div class="search-stats" id="searchStats">100% Sẵn sàng</div>
+    </div>
+    <div class="filter-pills">
+        <button class="pill-btn active" data-filter="all">Tất cả (Toàn tài liệu)</button>
+        <button class="pill-btn" data-filter="c1">Chương 1: Điện trường tĩnh</button>
+        <button class="pill-btn" data-filter="c2">Chương 2: Vật dẫn – Tụ điện</button>
+        <button class="pill-btn" data-filter="c3">Chương 3: Điện môi</button>
+        <button class="pill-btn" data-filter="bay-thi">⚠️ Bẫy thi & Lưu ý</button>
+        <button class="pill-btn" data-filter="cong-thuc">⚡ Bảng công thức</button>
+    </div>
+</header>
+
+<!-- Overlay for Drawers -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- Slide-in Drawer: Bookmarks -->
+<div class="drawer-panel" id="bookmarksDrawer">
+    <div class="drawer-header">
+        <div class="drawer-title">⭐ Công Thức & Mục Đã Lưu</div>
+        <button class="drawer-close" id="btnCloseBookmarks">&times;</button>
+    </div>
+    <div class="drawer-body" id="bookmarksList">
+        <!-- Rendered by JS -->
+    </div>
+    <div class="drawer-footer">
+        <button class="tool-btn" id="btnClearAllBookmarks">Xóa tất cả mục đã lưu</button>
+    </div>
+</div>
+
+<!-- Slide-in Drawer: Personal Study Notes -->
+<div class="drawer-panel" id="notesDrawer">
+    <div class="drawer-header">
+        <div class="drawer-title">📝 Ghi Chú Cá Nhân Của Bạn</div>
+        <button class="drawer-close" id="btnCloseNotes">&times;</button>
+    </div>
+    <div class="drawer-body">
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 0;">
+            💾 Dữ liệu được lưu trực tiếp trên trình duyệt của máy bạn (LocalStorage). Bạn có thể ghi nhớ mẹo làm bài, công thức cá nhân mà không sợ bị người khác can thiệp.
+        </p>
+        <div class="note-tabs">
+            <button class="note-tab-btn active" data-tab="c1">Chương 1</button>
+            <button class="note-tab-btn" data-tab="c2">Chương 2</button>
+            <button class="note-tab-btn" data-tab="c3">Chương 3</button>
+            <button class="note-tab-btn" data-tab="general">Ghi chú chung</button>
+        </div>
+        <textarea class="note-textarea" id="noteInput" placeholder="Nhập ghi chú cá nhân cho chương này tại đây (tự động lưu)..."></textarea>
+        <div class="save-indicator" id="saveIndicator">
+            <span>✓ Đã lưu trên máy của bạn</span>
+        </div>
+    </div>
+    <div class="drawer-footer">
+        <button class="tool-btn" id="btnExportNotes">📥 Xuất file (.txt)</button>
+    </div>
+</div>
+
+
+<div class="layout-container">
+    <!-- Sticky Interactive Table of Contents -->
+    <nav class="sidebar-toc">
+        <h3>Mục Lục Nhanh</h3>
+        <ul>
+            <li><a href="#chuong-1-dien-truong-tinh"><strong>Chương 1: Điện trường tĩnh</strong></a></li>
+            <li class="toc-sub"><a href="#11-ly-thuyet-chuong-1">1.1. Bản chất lý thuyết</a></li>
+            <li class="toc-sub"><a href="#12-bang-cong-thuc-chuong-1">1.2. Bảng công thức chuẩn</a></li>
+            <li class="toc-sub"><a href="#13-dang-bai-chuong-1">1.3. Phân loại dạng bài tập</a></li>
+            <li class="toc-sub"><a href="#14-bay-thi-chuong-1">1.4. Bẫy thi cần tránh</a></li>
+            
+            <li style="margin-top: 10px;"><a href="#chuong-2-vat-dan-tu-dien"><strong>Chương 2: Vật dẫn – Tụ điện</strong></a></li>
+            <li class="toc-sub"><a href="#21-ly-thuyet-chuong-2">2.1. Bản chất lý thuyết</a></li>
+            <li class="toc-sub"><a href="#22-bang-cong-thuc-chuong-2">2.2. Bảng công thức chuẩn</a></li>
+            <li class="toc-sub"><a href="#23-dang-bai-chuong-2">2.3. Phân loại dạng bài tập</a></li>
+            <li class="toc-sub"><a href="#24-bay-thi-chuong-2">2.4. Bẫy thi cần tránh</a></li>
+            
+            <li style="margin-top: 10px;"><a href="#chuong-3-dien-moi"><strong>Chương 3: Điện môi</strong></a></li>
+            <li class="toc-sub"><a href="#31-ly-thuyet-chuong-3">3.1. Bản chất lý thuyết</a></li>
+            <li class="toc-sub"><a href="#32-bang-cong-thuc-chuong-3">3.2. Bảng công thức chuẩn</a></li>
+            <li class="toc-sub"><a href="#33-dang-bai-chuong-3">3.3. Phân loại dạng bài tập</a></li>
+            <li class="toc-sub"><a href="#34-bay-thi-chuong-3">3.4. Bẫy thi cần tránh</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainContent">
+<h1 class="chapter-header searchable-block">SỔ TAY TỔNG HỢP KIẾN THỨC & CÔNG THỨC ÔN THI VẬT LÝ ĐẠI CƯƠNG 2 (PH1120)</h1>
+<h2 class="sub-chapter-header searchable-block">CHUYÊN ĐỀ: 03 CHƯƠNG ĐẦU (ĐIỆN TRƯỜNG TĨNH – VẬT DẪN & TỤ ĐIỆN – ĐIỆN MÔI)</h2>
+<div class="info-card searchable-block">
+<p><strong>Mục tiêu tài liệu:</strong> Tổng hợp toàn diện lý thuyết bản chất, hệ thống công thức chuẩn mực (đã hiệu đính toàn bộ lỗi sai lệch từ các bản tóm tắt cũ), phân loại chi tiết các dạng bài tập, cung cấp phương pháp tổng quát, công thức giải nhanh và chỉ dẫn cụ thể các bẫy thi thường gặp trong 15 bộ đề thi giữa kỳ của Đại học Bách Khoa Hà Nội.</p>
+</div>
+<p class="searchable-block">></p>
+<div class="info-card searchable-block">
+<p><strong>Quy ước hằng số chuẩn:</strong></p>
+<p>* Hằng số điện trong chân không: $\varepsilon_0 = 8{,}86 \cdot 10^{-12} \, \text{C}^2/(\text{N}\cdot\text{m}^2)$ (hoặc $\text{F/m}$).</p>
+<p>* Hằng số tỉ lệ Coulomb: $k = \dfrac{1}{4\pi\varepsilon_0} = 9 \cdot 10^9 \, \text{N}\cdot\text{m}^2/\text{C}^2$.</p>
+<p>* Điện tích nguyên tố: $e = 1{,}6 \cdot 10^{-19} \, \text{C}$; Khối lượng electron: $m_e = 9{,}1 \cdot 10^{-31} \, \text{kg}$.</p>
+<p>* Gia tốc trọng trường: $g = 9{,}8 \, \text{m/s}^2$ hoặc $10 \, \text{m/s}^2$ (tùy đề bài).</p>
+</div>
+<hr>
+<h2 class="sub-chapter-header searchable-block">MỤC LỤC TỔNG QUAN</h2>
+<ul class="searchable-block">
+<li><a href="#chuong-1-dien-truong-tinh">CHƯƠNG 1: ĐIỆN TRƯỜNG TĨNH</a></li>
+<li><a href="#11-ly-thuyet-chuong-1">1.1. Tóm tắt bản chất lý thuyết cốt lõi</a></li>
+<li><a href="#12-bang-cong-thuc-chuong-1">1.2. Bảng hệ thống công thức chuẩn cường độ điện trường & điện thế</a></li>
+<li><a href="#13-dang-bai-chuong-1">1.3. Phân loại dạng bài tập, phương pháp giải & công thức giải nhanh</a></li>
+<li><a href="#14-bay-thi-chuong-1">1.4. Các trường hợp đặc biệt & Bẫy thi cần tránh</a></li>
+<li><a href="#chuong-2-vat-dan-tu-dien">CHƯƠNG 2: VẬT DẪN – TỤ ĐIỆN</a></li>
+<li><a href="#21-ly-thuyet-chuong-2">2.1. Tóm tắt bản chất lý thuyết cốt lõi</a></li>
+<li><a href="#22-bang-cong-thuc-chuong-2">2.2. Bảng hệ thống công thức chuẩn điện dung & năng lượng</a></li>
+<li><a href="#23-dang-bai-chuong-2">2.3. Phân loại dạng bài tập, phương pháp giải & công thức giải nhanh</a></li>
+<li><a href="#24-bay-thi-chuong-2">2.4. Các trường hợp đặc biệt & Bẫy thi cần tránh</a></li>
+<li><a href="#chuong-3-dien-moi">CHƯƠNG 3: ĐIỆN MÔI</a></li>
+<li><a href="#31-ly-thuyet-chuong-3">3.1. Tóm tắt bản chất lý thuyết cốt lõi</a></li>
+<li><a href="#32-bang-cong-thuc-chuong-3">3.2. Bảng hệ thống công thức phân cực, điện cảm & điều kiện biên</a></li>
+<li><a href="#33-dang-bai-chuong-3">3.3. Phân loại dạng bài tập, phương pháp giải & công thức giải nhanh</a></li>
+<li><a href="#34-bay-thi-chuong-3">3.4. Các trường hợp đặc biệt & Bẫy thi cần tránh</a></li>
+</ul>
+<hr>
+<div id="chuong-1-dien-truong-tinh" class="scroll-target"></div>
+<h1 class="chapter-header searchable-block">CHƯƠNG 1: ĐIỆN TRƯỜNG TĨNH</h1>
+<div id="11-ly-thuyet-chuong-1" class="scroll-target"></div>
+<h3 class="section-header searchable-block">1.1. TÓM TẮT BẢN CHẤT LÝ THUYẾT CỐT LÕI</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 220" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1e40af"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <!-- Background panel -->
+  <rect x="5" y="5" width="640" height="210" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="28" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 1.1: Mômen lưỡng cực điện p_e và Điện trường trên trục / trung trực</text>
+  
+  <!-- Dipole Axis -->
+  <line x1="80" y1="140" x2="480" y2="140" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"/>
+  <!-- Negative charge -->
+  <circle cx="150" cy="140" r="16" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+  <text x="145" y="145" font-size="15" font-weight="bold" fill="#dc2626">-q</text>
+  <!-- Positive charge -->
+  <circle cx="270" cy="140" r="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="264" y="145" font-size="15" font-weight="bold" fill="#2563eb">+q</text>
+  <!-- Distance l -->
+  <line x1="150" y1="175" x2="270" y2="175" stroke="#64748b" stroke-width="1.5"/>
+  <text x="205" y="193" font-size="13" font-weight="bold" fill="#475569">khoảng cách l</text>
+  
+  <!-- Dipole moment vector p_e (from -q to +q) -->
+  <line x1="180" y1="120" x2="245" y2="120" stroke="#059669" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="200" y="112" font-size="14" font-weight="bold" fill="#059669">p_e = q.l</text>
+  
+  <!-- Point on the Axis (r) -->
+  <circle cx="430" cy="140" r="4" fill="#1e293b"/>
+  <text x="425" y="160" font-size="13" font-weight="bold" fill="#1e293b">M (trên trục)</text>
+  <line x1="430" y1="140" x2="520" y2="140" stroke="#1e40af" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="450" y="130" font-size="13" font-weight="bold" fill="#1e40af">E = 2p_e / (4πε_0ε r^3)</text>
+  
+  <!-- Point on Perpendicular Bisector (h) -->
+  <line x1="210" y1="140" x2="210" y2="50" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"/>
+  <circle cx="210" cy="65" r="4" fill="#1e293b"/>
+  <text x="125" y="65" font-size="13" font-weight="bold" fill="#1e293b">N (trung trực, h)</text>
+  <!-- E at N (points opposite to p_e) -->
+  <line x1="210" y1="65" x2="140" y2="65" stroke="#1e40af" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="145" y="52" font-size="13" font-weight="bold" fill="#1e40af">E = p_e / (4πε_0ε h^3)</text>
+</svg>
+<div class="diagram-caption">Sơ đồ véc-tơ lưỡng cực điện $ec{p}_e$ (hướng từ âm sang dương) và điện trường $ec{E}$ trên trục chính cùng trung trực.</div>
+</div>
+<ol class="searchable-block">
+<li><strong>Định luật Coulomb:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Lực tương tác tĩnh điện giữa hai điện tích điểm $q_1, q_2$ đứng yên trong môi trường đồng chất, đẳng hướng có hằng số điện môi $\varepsilon$:</li>
+</ul>
+<div class="display-math searchable-block">     $$\vec{F}_{12} = \frac{1}{4\pi\varepsilon_0\varepsilon} \frac{q_1 q_2}{r^2} \frac{\vec{r}_{12}}{r} \implies F = \frac{k |q_1 q_2|}{\varepsilon r^2}$$</div>
+<ul class="searchable-block">
+<li>*Đặc điểm:* Phương nằm trên đường nối hai điện tích; Cùng dấu thì đẩy, trái dấu thì hút; Tuân theo định luật III Newton ($\vec{F}_{12} = -\vec{F}_{21}$).</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Véctơ Cường độ điện trường ($\vec{E}$):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Định nghĩa: Đại lượng véctơ đặc trưng cho điện trường về phương diện tác dụng lực:</li>
+</ul>
+<div class="display-math searchable-block">     $$\vec{E} = \frac{\vec{F}}{q_0} = \frac{1}{4\pi\varepsilon_0\varepsilon}\frac{q}{r^2}\frac{\vec{r}}{r} \implies E = \frac{k|q|}{\varepsilon r^2} \quad (\text{Đơn vị: } \text{V/m hoặc N/C})$$</div>
+<ul class="searchable-block">
+<li>Hướng ra xa điện tích dương ($q > 0$) và hướng lại gần điện tích âm ($q < 0$).</li>
+<li>*Nguyên lý chồng chất điện trường:* $\vec{E} = \sum_{i=1}^n \vec{E}_i$ (hệ rời rạc) hoặc $\vec{E} = \int \frac{dq}{4\pi\varepsilon_0\varepsilon r^2}\frac{\vec{r}}{r}$ (vật tích điện liên tục).</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Lưỡng cực điện:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Hệ gồm hai điện tích bằng nhau về độ lớn nhưng trái dấu ($+q$ và $-q$) cách nhau một khoảng $l$ rất nhỏ.</li>
+<li>Véctơ mômen lưỡng cực điện: $\vec{p}_e = q \vec{l}$ (chiều từ điện tích âm sang điện tích dương).</li>
+<li>Cường độ điện trường trên trung trực lưỡng cực (cách tâm khoảng $h \gg l$): $E = \frac{p_e}{4\pi\varepsilon_0\varepsilon h^3}$.</li>
+<li>Cường độ điện trường trên trục lưỡng cực (cách tâm khoảng $r \gg l$): $E = \frac{2p_e}{4\pi\varepsilon_0\varepsilon r^3}$.</li>
+<li>Tác dụng của điện trường ngoài đều $\vec{E}_0$: Mômen ngẫu lực làm quay lưỡng cực: $\vec{M} = \vec{p}_e \times \vec{E}_0$; Thế năng của lưỡng cực: $W_t = -\vec{p}_e \cdot \vec{E}_0$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Điện thông & Định lý Ostrogradski – Gauss (O-G):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Điện thông gửi qua một yếu tố diện tích $d\vec{S} = \vec{n}dS$: $d\Phi_e = \vec{E} \cdot d\vec{S} = E \cos\alpha \, dS$.</li>
+<li><strong>Định lý O-G:</strong> Điện thông gửi qua một mặt kín $(S)$ bất kỳ bằng tổng đại số các điện tích chứa bên trong mặt kín đó chia cho $\varepsilon_0\varepsilon$:</li>
+</ul>
+<div class="display-math searchable-block">     $$\Phi_e = \oint_{(S)} \vec{E} \cdot d\vec{S} = \frac{1}{\varepsilon_0\varepsilon} \sum q_{\text{trong}}$$</div>
+<ul class="searchable-block">
+<li>Hoặc biểu diễn qua véctơ điện cảm $\vec{D} = \varepsilon_0\varepsilon \vec{E}$: $\oint_{(S)} \vec{D} \cdot d\vec{S} = \sum q_{\text{trong}}$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Công của lực tĩnh điện & Tính chất thế của trường tĩnh điện:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Công dịch chuyển điện tích $q_0$ trong điện trường bất kỳ:</li>
+</ul>
+<div class="display-math searchable-block">     $$A_{MN} = \int_M^N q_0 \vec{E} \cdot d\vec{s} = q_0(V_M - V_N) = W_{tM} - W_{tN}$$</div>
+<ul class="searchable-block">
+<li>*Đặc tính then chốt:* Công của lực tĩnh điện <strong>không phụ thuộc vào dạng đường đi</strong>, chỉ phụ thuộc vào vị trí điểm đầu $M$ và điểm cuối $N$.</li>
+<li>Lưu số của véctơ cường độ điện trường tĩnh dọc theo một đường cong kín $(C)$ bất kỳ luôn bằng không:</li>
+</ul>
+<div class="display-math searchable-block">     $$\oint_{(C)} \vec{E} \cdot d\vec{s} = 0 \implies \text{Trường tĩnh điện là một trường thế.}$$</div>
+<ol class="searchable-block">
+<li><strong>Điện thế ($V$) và Hiệu điện thế ($U$):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Điện thế tại điểm $M$: Đại lượng đặc trưng cho điện trường về phương diện dự trữ năng lượng:</li>
+</ul>
+<div class="display-math searchable-block">     $$V_M = \int_M^\infty \vec{E} \cdot d\vec{s} = \frac{W_{tM}}{q_0} \quad (\text{Chọn mốc thế năng ở vô cùng } V_\infty = 0)$$</div>
+<ul class="searchable-block">
+<li>Điện thế do một điện tích điểm gây ra: $V_M = \frac{q}{4\pi\varepsilon_0\varepsilon r} = \frac{kq}{\varepsilon r}$.</li>
+<li>Hiệu điện thế giữa 2 điểm: $U_{MN} = V_M - V_N = \frac{A_{MN}}{q_0}$.</li>
+<li>Mối liên hệ vi phân giữa $\vec{E}$ và $V$: $\vec{E} = -\text{grad}\,V$, trên một phương dịch chuyển $s$: $E_s = -\frac{\partial V}{\partial s}$. Véctơ $\vec{E}$ luôn hướng theo chiều <strong>giảm</strong> của điện thế.</li>
+</ul>
+<hr>
+<div id="12-bang-cong-thuc-chuong-1" class="scroll-target"></div>
+<h3 class="section-header searchable-block">1.2. BẢNG HỆ THỐNG CÔNG THỨC CHUẨN CƯỜNG ĐỘ ĐIỆN TRƯỜNG & ĐIỆN THẾ</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="640" height="220" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="28" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 1.2: Định lý Ostrogradski – Gauss cho dây dẫn thẳng dài vô hạn</text>
+  
+  <!-- Long charged wire -->
+  <line x1="40" y1="120" x2="610" y2="120" stroke="#dc2626" stroke-width="4"/>
+  <text x="50" y="110" font-size="13" font-weight="bold" fill="#dc2626">+ + + Dây dẫn dài mang điện λ + + +</text>
+  
+  <!-- Gaussian Cylinder -->
+  <!-- Left base ellipse -->
+  <ellipse cx="200" cy="120" rx="20" ry="60" fill="#e0f2fe" fill-opacity="0.6" stroke="#0284c7" stroke-width="2"/>
+  <!-- Cylinder body -->
+  <line x1="200" y1="60" x2="440" y2="60" stroke="#0284c7" stroke-width="2"/>
+  <line x1="200" y1="180" x2="440" y2="180" stroke="#0284c7" stroke-width="2"/>
+  <!-- Right base ellipse -->
+  <ellipse cx="440" cy="120" rx="20" ry="60" fill="#bae6fd" fill-opacity="0.7" stroke="#0284c7" stroke-width="2"/>
+  
+  <!-- Radial electric field arrows -->
+  <line x1="320" y1="60" x2="320" y2="25" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <text x="330" y="42" font-size="13" font-weight="bold" fill="#2563eb">E (vuông góc xung quanh)</text>
+  
+  <line x1="320" y1="180" x2="320" y2="215" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <text x="330" y="210" font-size="13" font-weight="bold" fill="#2563eb">E</text>
+
+  <!-- Cylinder dimensions: length h, radius r -->
+  <line x1="200" y1="195" x2="440" y2="195" stroke="#475569" stroke-width="1.5"/>
+  <text x="300" y="210" font-size="13" font-weight="bold" fill="#475569">chiều dài h</text>
+  <line x1="440" y1="120" x2="440" y2="60" stroke="#475569" stroke-width="1.5"/>
+  <text x="448" y="95" font-size="13" font-weight="bold" fill="#475569">bán kính r</text>
+  
+  <!-- Flux notes -->
+  <text x="480" y="115" font-size="12.5" fill="#0369a1">Φ_đáy = 0 (E // mặt đáy)</text>
+  <text x="480" y="135" font-size="12.5" font-weight="bold" fill="#0369a1">Φ_xq = E.(2πrh) = q_trong/ε_0ε</text>
+  <text x="480" y="155" font-size="13" font-weight="bold" fill="#b91c1c">⇒ E = λ / (2πε_0ε r)</text>
+</svg>
+<div class="diagram-caption">Mặt Gauss hình trụ đồng trục bao quanh dây dẫn dài vô hạn: điện thông qua 2 đáy bằng 0, chỉ qua mặt xung quanh.</div>
+</div>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 250" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <rect x="5" y="5" width="640" height="240" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="26" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 1.3: So sánh đồ thị Điện trường E(r) & Điện thế V(r) giữa Cầu đặc và Mặt cầu kim loại</text>
+  
+  <!-- Left: E(r) Plot -->
+  <line x1="50" y1="190" x2="310" y2="190" stroke="#334155" stroke-width="2"/> <!-- Axis r -->
+  <line x1="50" y1="190" x2="50" y2="45" stroke="#334155" stroke-width="2"/>   <!-- Axis E -->
+  <text x="315" y="195" font-size="13" font-weight="bold" fill="#334155">r</text>
+  <text x="40" y="40" font-size="13" font-weight="bold" fill="#334155">E</text>
+  <line x1="150" y1="190" x2="150" y2="60" stroke="#94a3b8" stroke-dasharray="3"/>
+  <text x="145" y="205" font-size="12" font-weight="bold" fill="#64748b">R</text>
+  
+  <!-- Sphere E curve: linear inside, 1/r^2 outside -->
+  <line x1="50" y1="190" x2="150" y2="80" stroke="#2563eb" stroke-width="2.5"/>
+  <path d="M 150 80 Q 200 150 300 178" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <text x="90" y="125" font-size="11" font-weight="bold" fill="#2563eb">Cầu đặc (E~r)</text>
+  <!-- Hollow Sphere E: 0 inside, step at R -->
+  <line x1="50" y1="189" x2="149" y2="189" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="4"/>
+  <text x="60" y="180" font-size="11" font-weight="bold" fill="#dc2626">Cầu rỗng: E=0</text>
+
+  <!-- Right: V(r) Plot -->
+  <line x1="370" y1="190" x2="620" y2="190" stroke="#334155" stroke-width="2"/> <!-- Axis r -->
+  <line x1="370" y1="190" x2="370" y2="45" stroke="#334155" stroke-width="2"/>   <!-- Axis V -->
+  <text x="625" y="195" font-size="13" font-weight="bold" fill="#334155">r</text>
+  <text x="360" y="40" font-size="13" font-weight="bold" fill="#334155">V</text>
+  <line x1="470" y1="190" x2="470" y2="60" stroke="#94a3b8" stroke-dasharray="3"/>
+  <text x="465" y="205" font-size="12" font-weight="bold" fill="#64748b">R</text>
+  
+  <!-- Hollow Sphere V: CONSTANT from 0 to R! -->
+  <line x1="370" y1="100" x2="470" y2="100" stroke="#dc2626" stroke-width="3"/>
+  <path d="M 470 100 Q 520 150 610 178" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <text x="375" y="90" font-size="12" font-weight="bold" fill="#dc2626">Cầu kim loại: V = const = kQ/R (KHÔNG BẰNG 0!)</text>
+
+  <!-- Solid Sphere V: parabola inside from 1.5 V_R down to V_R -->
+  <path d="M 370 70 Q 420 75 470 100" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="4"/>
+  <text x="375" y="65" font-size="11" font-weight="bold" fill="#2563eb">V_tâm = 1.5 V_R</text>
+</svg>
+<div class="diagram-caption">Đồ thị thực tế: Trong lòng mặt cầu kim loại rỗng, $E=0$ nhưng điện thế $V$ không đổi và bằng điện thế mặt cầu $rac{kQ}{arepsilon R}$.</div>
+</div>
+<div class="table-container searchable-block" data-category="cong-thuc"><table><thead><tr>
+<th>Vật mang điện</th>
+<th>Điều kiện khảo sát</th>
+<th>Cường độ điện trường $E$</th>
+<th>Điện thế $V$</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Điện tích điểm $q$</strong></td>
+<td>Cách $q$ khoảng $r$</td>
+<td>$E = \dfrac{k\vert q \vert}{\varepsilon r^2}$</td>
+<td>$V = \dfrac{kq}{\varepsilon r}$</td>
+</tr>
+<tr>
+<td><strong>Dây thẳng dài vô hạn</strong> $(\lambda)$</td>
+<td>Cách dây khoảng $r$</td>
+<td>$E = \dfrac{\vert \lambda \vert}{2\pi\varepsilon_0\varepsilon r} = \dfrac{2k\vert \lambda \vert}{\varepsilon r}$</td>
+<td>$V_A - V_B = \dfrac{\lambda}{2\pi\varepsilon_0\varepsilon} \ln\dfrac{r_B}{r_A}$</td>
+</tr>
+<tr>
+<td><strong>Đoạn dây thẳng dài $L$</strong></td>
+<td>Trên trung trực cách thanh $h$</td>
+<td>$E = \dfrac{k\vert q \vert}{h\sqrt{h^2+(L/2)^2}} = \dfrac{2k\vert \lambda \vert(L/2)}{h\sqrt{h^2+(L/2)^2}}$</td>
+<td>$V = \dfrac{k\lambda}{\varepsilon}\ln\left(\dfrac{\sqrt{h^2+(L/2)^2}+L/2}{\sqrt{h^2+(L/2)^2}-L/2}\right)$</td>
+</tr>
+<tr>
+<td><strong>Vòng dây tròn bán kính $R$</strong> tích điện $q$</td>
+<td>Trên trục cách tâm $h$</td>
+<td>$E = \dfrac{k\vert q \vert h}{\varepsilon (R^2+h^2)^{3/2}}$</td>
+<td>$V = \dfrac{kq}{\varepsilon \sqrt{R^2+h^2}}$</td>
+</tr>
+<tr>
+<td><strong>Tâm vòng dây tròn</strong> $(h=0)$</td>
+<td>Tại tâm $O$</td>
+<td>$E = 0$</td>
+<td>$V = \dfrac{kq}{\varepsilon R}$</td>
+</tr>
+<tr>
+<td><strong>Nửa vòng dây tròn bán kính $R$</strong></td>
+<td>Tại tâm $O$</td>
+<td>$E = \dfrac{2k\vert q \vert}{\pi\varepsilon R^2} = \dfrac{2k\vert \lambda \vert}{\varepsilon R}$</td>
+<td>$V = \dfrac{kq}{\varepsilon R}$</td>
+</tr>
+<tr>
+<td><strong>Đĩa tròn bán kính $R$</strong> tích điện mặt $\sigma$</td>
+<td>Trên trục cách tâm $h$</td>
+<td>$E = \dfrac{\sigma}{2\varepsilon_0\varepsilon}\left(1 - \dfrac{h}{\sqrt{R^2+h^2}}\right)$</td>
+<td>$V = \dfrac{\sigma}{2\varepsilon_0\varepsilon}\left(\sqrt{R^2+h^2} - h\right)$</td>
+</tr>
+<tr>
+<td><strong>Mặt phẳng vô hạn</strong> $(\sigma)$</td>
+<td>Mọi điểm cách mặt phẳng</td>
+<td>$E = \dfrac{\vert \sigma \vert}{2\varepsilon_0\varepsilon}$</td>
+<td>$V_1 - V_2 = \dfrac{\sigma}{2\varepsilon_0\varepsilon}(x_2 - x_1)$</td>
+</tr>
+<tr>
+<td><strong>Hai mặt phẳng song song</strong> $(\pm \sigma)$</td>
+<td>Ở khoảng giữa hai bản</td>
+<td>$E = \dfrac{\sigma}{\varepsilon_0\varepsilon}$ (ngoài hai bản $E=0$)</td>
+<td>$U = Ed = \dfrac{\sigma d}{\varepsilon_0\varepsilon}$</td>
+</tr>
+<tr>
+<td><strong>Mặt phẳng vô hạn khoét lỗ bán kính $a$</strong></td>
+<td>Trên trục vuông góc cách tâm $b$</td>
+<td>$E = \dfrac{\sigma b}{2\varepsilon_0\varepsilon\sqrt{a^2+b^2}} = \dfrac{\sigma}{2\varepsilon_0\varepsilon\sqrt{1+(a/b)^2}}$</td>
+<td>$V = \dfrac{\sigma}{2\varepsilon_0\varepsilon}\left(\sqrt{a^2+b^2} - b\right)$</td>
+</tr>
+<tr>
+<td><strong>Đĩa tròn $R_2$ khoét lỗ trong $R_1$</strong></td>
+<td>Trên trục cách tâm $h$</td>
+<td>$E = \dfrac{\sigma h}{2\varepsilon_0\varepsilon}\left[\dfrac{1}{\sqrt{h^2+R_1^2}} - \dfrac{1}{\sqrt{h^2+R_2^2}}\right]$</td>
+<td>$V = \dfrac{\sigma}{2\varepsilon_0\varepsilon}\left(\sqrt{h^2+R_2^2} - \sqrt{h^2+R_1^2}\right)$</td>
+</tr>
+<tr>
+<td><strong>Mặt cầu rỗng bán kính $R$</strong> tích điện $q$</td>
+<td>Ngoài $(r \ge R)$<br>Trong $(r < R)$</td>
+<td>$E = \dfrac{k\vert q \vert}{\varepsilon r^2}$<br>$E = 0$</td>
+<td>$V = \dfrac{kq}{\varepsilon r}$<br>$V = \dfrac{kq}{\varepsilon R}$ (bằng điện thế bề mặt!)</td>
+</tr>
+<tr>
+<td><strong>Quả cầu đặc bán kính $R$</strong> tích điện đều thể tích $\rho$</td>
+<td>Ngoài $(r \ge R)$<br>Trong $(r \le R)$</td>
+<td>$E = \dfrac{k\vert q \vert}{\varepsilon r^2}$<br>$E = \dfrac{k\vert q \vert r}{\varepsilon R^3} = \dfrac{\rho r}{3\varepsilon_0\varepsilon}$</td>
+<td>$V = \dfrac{kq}{\varepsilon r}$<br>$V = \dfrac{kq}{2\varepsilon R}\left(3 - \dfrac{r^2}{R^2}\right)$</td>
+</tr>
+<tr>
+<td><strong>Hình trụ đặc dài vô hạn bán kính $R$</strong> $(\rho)$</td>
+<td>Ngoài $(r \ge R)$<br>Trong $(r \le R)$</td>
+<td>$E = \dfrac{\lambda}{2\pi\varepsilon_0\varepsilon r} = \dfrac{\rho R^2}{2\varepsilon_0\varepsilon r}$<br>$E = \dfrac{\rho r}{2\varepsilon_0\varepsilon} = \dfrac{\lambda r}{2\pi\varepsilon_0\varepsilon R^2}$</td>
+<td>$V(r_1) - V(r_2)$ tính theo tích phân từng vùng</td>
+</tr>
+</tbody></table></div>
+<hr>
+<div id="13-dang-bai-chuong-1" class="scroll-target"></div>
+<h3 class="section-header searchable-block">1.3. PHÂN LOẠI DẠNG BÀI TẬP, PHƯƠNG PHÁP GIẢI & CÔNG THỨC GIẢI NHANH</h3>
+<h4 class="sub-section-header searchable-block">Dạng 1.1: Cân bằng của quả cầu tích điện treo dây trong điện môi</h4>
+<ul class="searchable-block">
+<li><strong>Bài toán:</strong> Hai quả cầu khối lượng $m$, tích điện cùng dấu $q$, treo bằng 2 sợi dây chiều dài $l$ vào cùng một điểm. Góc lệch giữa 2 dây trong không khí là $2\alpha$. Nhúng cả hệ vào chất lỏng điện môi có hằng số điện môi $\varepsilon$ và khối lượng riêng $\rho_1$, góc lệch vẫn không đổi. Tìm khối lượng riêng $\rho$ của quả cầu.</li>
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+</ul>
+<ol class="searchable-block">
+<li>Trong không khí: $\tan\alpha = \dfrac{F_0}{P} = \dfrac{F_0}{mg}$ với $F_0 = \dfrac{kq^2}{r^2}$.</li>
+<li>Trong điện môi: Lực tương tác điện giảm $\varepsilon$ lần ($F = \dfrac{F_0}{\varepsilon}$); Quả cầu chịu thêm lực đẩy Archimedes $F_A = \rho_1 V g = \dfrac{\rho_1}{\rho} P$. Trọng lượng biểu kiến: $P' = P - F_A = mg\left(1 - \dfrac{\rho_1}{\rho}\right)$.</li>
+<li>Để góc lệch $\alpha$ không đổi: $\tan\alpha = \dfrac{F}{P'} \implies \dfrac{F_0}{P} = \dfrac{F_0 / \varepsilon}{P\left(1 - \dfrac{\rho_1}{\rho}\right)} \implies 1 = \dfrac{1}{\varepsilon\left(1 - \dfrac{\rho_1}{\rho}\right)}$.</li>
+</ol>
+<ul class="searchable-block">
+<li><strong>Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$\rho = \frac{\varepsilon}{\varepsilon - 1} \rho_1$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 1.2: Hạt bụi mang điện chuyển động trong điện trường đều</h4>
+<ul class="searchable-block">
+<li><strong>Bài toán:</strong> Hạt bụi khối lượng $m$ tích điện $q$ nằm lơ lửng trong tụ điện phẳng nằm ngang bản trên dương, bản dưới âm (hoặc rơi với vận tốc ổn định $v_1$ khi không có điện trường, $v_2$ khi có điện trường).</li>
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+<li>Trường hợp cân bằng tĩnh: $\vec{P} + \vec{F}_d = \vec{0} \implies mg = |q| E = |q| \dfrac{U}{d} \implies |q| = \dfrac{mgd}{U}$.</li>
+</ul>
+<p class="searchable-block">*(Dấu điện tích: Nếu $\vec{E}$ hướng xuống mà lực điện $\vec{F}_d$ hướng lên để đỡ trọng lực thì $q < 0$)*.</p>
+<ul class="searchable-block">
+<li>Trường hợp có lực cản môi trường (lực cản Stokes $F_c = 6\pi\eta r v$):</li>
+<li>Khi không có điện trường: $mg = 6\pi\eta r v_1$.</li>
+<li>Khi có điện trường hướng lên: $mg - |q|E = 6\pi\eta r v_2$.</li>
+<li><strong>Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$|q| = \frac{mg}{E}\left(1 - \frac{v_2}{v_1}\right)$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 1.3: Cực trị của cường độ điện trường trên trục vòng dây</h4>
+<ul class="searchable-block">
+<li><strong>Bài toán:</strong> Tìm vị trí điểm $M$ trên trục vòng dây tròn bán kính $R$ tích điện $q$ để cường độ điện trường đạt cực đại $E_{\max}$.</li>
+<li><strong>Phương pháp & Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$E(h) = \frac{k|q|h}{(R^2+h^2)^{3/2}} \implies \frac{dE}{dh} = 0 \implies h = \pm \frac{R}{\sqrt{2}}$$</div>
+<div class="display-math searchable-block">  $$E_{\max} = \frac{2k|q|}{3\sqrt{3} R^2}$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 1.4: Công của lực điện khi dịch chuyển điện tích</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp tổng quát:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$A_{MN} = q(V_M - V_N)$$</div>
+<ul class="searchable-block">
+<li>Dịch chuyển trong điện trường của điện tích điểm $Q$: $A_{MN} = \dfrac{k q Q}{\varepsilon}\left(\dfrac{1}{r_M} - \dfrac{1}{r_N}\right)$.</li>
+<li>Dịch chuyển trong điện trường của dây dẫn thẳng dài vô hạn: $A_{MN} = \dfrac{q\lambda}{2\pi\varepsilon_0\varepsilon} \ln\dfrac{r_N}{r_M}$.</li>
+<li>Dịch chuyển trong điện trường đều: $A_{MN} = q \vec{E} \cdot \vec{d}_{MN} = q E s \cos\alpha$.</li>
+</ul>
+<hr>
+<div id="14-bay-thi-chuong-1" class="scroll-target"></div>
+<h3 class="section-header searchable-block">1.4. CÁC TRƯỜNG HỢP ĐẶC BIỆT & BẪY THI CẦN TRÁNH</h3>
+<div class="alert-box alert-caution searchable-block" data-category="bay-thi">
+<div class="alert-title">🔴 BẪY THI CỰC KỲ NGUY HIỂM</div>
+<p><strong>BẪY 1: Điện thế bên trong mặt cầu kim loại rỗng</strong></p>
+<p>Rất nhiều đề thi hỏi: *"Một mặt cầu kim loại bán kính $R$ tích điện $Q$, điện thế tại tâm $O$ bằng bao nhiêu?"*</p>
+<p>- <strong>Sai lầm phổ biến:</strong> Thấy bên trong mặt cầu $E = 0$ nên vội chọn $V = 0$.</p>
+<p>- <strong>Chuẩn xác 100%:</strong> Điện trường $E = -\dfrac{dV}{dr} = 0 \implies V = \text{const}$ tại mọi điểm trong lòng và trên bề mặt cầu:</p>
+<p>  $$V_{\text{trong}} = V_{\text{tâm}} = V_{\text{mặt}} = \frac{kQ}{\varepsilon R} \neq 0$$</p>
+</div>
+<div class="alert-box alert-warning searchable-block" data-category="bay-thi">
+<div class="alert-title">⚠️ LƯU Ý BẪY DẤU / SAI SỐ</div>
+<p><strong>BẪY 2: Đảo ngược tỷ số logarit gây sai dấu công dịch chuyển quanh dây dẫn</strong></p>
+<p>Công thức chuẩn khi dịch chuyển điện tích $q$ từ khoảng cách $r_A$ đến khoảng cách $r_B$:</p>
+<p>$$A_{A \to B} = q(V_A - V_B) = \frac{q\lambda}{2\pi\varepsilon_0\varepsilon} \ln\frac{r_B}{r_A}$$</p>
+<p>- Nếu $q > 0, \lambda > 0$ và dịch chuyển ra xa ($r_B > r_A$), lực đẩy sinh công phát động $\implies A > 0$. Hàm $\ln(r_B/r_A) > 0$.</p>
+<p>- Nếu viết $\ln(r_A/r_B)$ như ở 'Bản 2' thì công sẽ bị âm (hoàn toàn trái bản chất vật lý).</p>
+</div>
+<div class="alert-box alert-note searchable-block" data-category="bay-thi">
+<div class="alert-title">💡 CHÚ Ý ĐẶC BIỆT</div>
+<p><strong>BẪY 3: Sai đơn vị của mật độ điện tích dài $\lambda$</strong></p>
+<p>- Mật độ dài: $\lambda = \dfrac{dq}{dl}$ có đơn vị là $\mathbf{C/m}$.</p>
+<p>- Mật độ mặt: $\sigma = \dfrac{dq}{dS}$ có đơn vị là $\mathbf{C/m^2}$.</p>
+<p>- Mật độ khối: $\rho = \dfrac{dq}{dV}$ có đơn vị là $\mathbf{C/m^3}$.</p>
+<p>*(Không nhầm lẫn đơn vị $\text{C/m}^3$ cho $\lambda$ như trong một số tài liệu tóm tắt cũ)*.</p>
+</div>
+<hr>
+<div id="chuong-2-vat-dan-tu-dien" class="scroll-target"></div>
+<h1 class="chapter-header searchable-block">CHƯƠNG 2: VẬT DẪN – TỤ ĐIỆN</h1>
+<div id="21-ly-thuyet-chuong-2" class="scroll-target"></div>
+<h3 class="section-header searchable-block">2.1. TÓM TẮT BẢN CHẤT LÝ THUYẾT CỐT LÕI</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 220" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <defs>
+    <marker id="arr-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="640" height="210" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="26" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 2.1: Tính chất của Vật dẫn cân bằng tĩnh điện & Hiệu ứng mũi nhọn</text>
+  
+  <!-- Conductor pear-shaped with sharp tip -->
+  <path d="M 160 80 C 220 50, 340 70, 420 110 C 470 135, 490 140, 500 140 C 480 155, 430 170, 360 180 C 240 195, 120 180, 110 135 C 105 105, 130 90, 160 80 Z" 
+        fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+        
+  <!-- Interior properties -->
+  <text x="230" y="125" font-size="14" font-weight="bold" fill="#1e40af">E_trong = 0</text>
+  <text x="220" y="145" font-size="13" font-weight="bold" fill="#047857">V = const (Khối đẳng thế)</text>
+  <text x="235" y="165" font-size="12" fill="#64748b">ρ_trong = 0</text>
+  
+  <!-- Charge density at flat parts -->
+  <text x="140" y="70" font-size="13" font-weight="bold" fill="#dc2626">+</text>
+  <text x="240" y="60" font-size="13" font-weight="bold" fill="#dc2626">+</text>
+  <text x="330" y="75" font-size="13" font-weight="bold" fill="#dc2626">+</text>
+  
+  <!-- Normal electric field lines (perpendicular to surface) -->
+  <line x1="160" y1="78" x2="145" y2="45" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <line x1="250" y1="62" x2="250" y2="28" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <line x1="335" y1="72" x2="350" y2="38" stroke="#2563eb" stroke-width="2" marker-end="url(#arr-blue)"/>
+  <text x="180" y="40" font-size="12" fill="#2563eb">E ⊥ mặt (E_t = 0)</text>
+
+  <!-- Dense charges and strong field at sharp tip -->
+  <text x="450" y="120" font-size="13" font-weight="bold" fill="#dc2626">++</text>
+  <text x="480" y="135" font-size="13" font-weight="bold" fill="#dc2626">+++</text>
+  <text x="460" y="155" font-size="13" font-weight="bold" fill="#dc2626">++</text>
+  <line x1="500" y1="140" x2="560" y2="140" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <line x1="490" y1="130" x2="550" y2="115" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <line x1="490" y1="150" x2="550" y2="165" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-blue)"/>
+  <text x="510" y="95" font-size="12.5" font-weight="bold" fill="#b91c1c">Mũi nhọn: σ cực lớn</text>
+  <text x="510" y="190" font-size="12" font-weight="bold" fill="#b91c1c">Điện trường cực mạnh (Gió điện)</text>
+</svg>
+<div class="diagram-caption">Vật dẫn cân bằng tĩnh điện là khối đẳng thế, điện trường bên trong bằng 0, điện trường bề mặt vuông góc và mật độ điện mặt tập trung cao nhất ở mũi nhọn.</div>
+</div>
+<ol class="searchable-block">
+<li><strong>Điều kiện cân bằng tĩnh điện của vật dẫn:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Cường độ điện trường tại mọi điểm bên trong vật dẫn triệt tiêu: $\vec{E}_{\text{trong}} = \vec{0}$.</li>
+<li>Cường độ điện trường tại mọi điểm sát bề mặt vật dẫn vuông góc với bề mặt: $\vec{E}_t = \vec{0} \implies \vec{E} = \vec{E}_n$.</li>
+<li>Toàn bộ vật dẫn (cả bên trong và bề mặt) là một <strong>khối đẳng thế</strong>: $V = \text{const}$.</li>
+<li>Điện tích của vật dẫn chỉ phân bố trên bề mặt ngoài; Trong lòng vật dẫn điện tích tự do triệt tiêu: $\rho_{\text{trong}} = 0$.</li>
+<li>Điện trường sát mặt vật dẫn: $E_n = \dfrac{\sigma}{\varepsilon_0\varepsilon}$ (Định lý Coulomb cho vật dẫn).</li>
+<li>Mật độ điện mặt $\sigma$ phân bố phụ thuộc vào độ cong bề mặt: Tập trung cực lớn ở chỗ mũi nhọn $\implies$ Điện trường cực mạnh làm ion hóa không khí $\implies$ Hiệu ứng mũi nhọn (gió điện, nguyên lý cột thu lôi). Chỗ lõm $\sigma \approx 0$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Hiện tượng điện hưởng:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li><strong>Điện hưởng một phần:</strong> Chỉ một phần đường sức của vật mang điện đi tới vật bị điện hưởng $\implies |q'| < |q|$.</li>
+<li><strong>Điện hưởng toàn phần:</strong> Toàn bộ đường sức từ vật mang điện đều tận cùng trên vật bị điện hưởng (vật bị điện hưởng bao bọc hoàn toàn vật mang điện) $\implies |q'| = |q|$.</li>
+<li>*Ứng dụng:* Màn chắn tĩnh điện (bảo vệ thiết bị đo chính xác bằng lồng kim loại Faraday); Máy phát tĩnh điện Van de Graaff.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Điện dung của vật dẫn cô lập:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Định nghĩa: Đại lượng đo bằng điện tích cần truyền cho vật dẫn để điện thế của nó tăng thêm 1 vôn:</li>
+</ul>
+<div class="display-math searchable-block">     $$C = \frac{Q}{V} \quad (\text{Đơn vị: } \text{Farad, F})$$</div>
+<ul class="searchable-block">
+<li>*Đặc tính:* $C$ chỉ phụ thuộc vào hình dạng, kích thước của vật dẫn và môi trường điện môi xung quanh; <strong>không phụ thuộc</strong> vào $Q$ hay $V$.</li>
+<li>Quả cầu kim loại cô lập bán kính $R$: $C = 4\pi\varepsilon_0\varepsilon R = \dfrac{R}{k}$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Tụ điện:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Hệ gồm hai vật dẫn đặt gần nhau ở trạng thái điện hưởng toàn phần mang điện tích bằng nhau về độ lớn nhưng trái dấu ($+q$ và $-q$).</li>
+<li>Điện dung của tụ điện: $C = \dfrac{q}{U} = \dfrac{q}{V_1 - V_2}$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Năng lượng tĩnh điện & Năng lượng điện trường:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Năng lượng tương tác của hệ $n$ điện tích điểm: $W = \dfrac{1}{2}\sum_{i=1}^n q_i V_i$.</li>
+<li>Năng lượng của vật dẫn cô lập: $W = \dfrac{1}{2}QV = \dfrac{1}{2}CV^2 = \dfrac{Q^2}{2C}$.</li>
+<li>Năng lượng của tụ điện: $W = \dfrac{1}{2}qU = \dfrac{1}{2}CU^2 = \dfrac{q^2}{2C}$.</li>
+<li>Mật độ năng lượng điện trường (định xứ trong không gian có điện trường):</li>
+</ul>
+<div class="display-math searchable-block">     $$w = \frac{1}{2}\varepsilon_0\varepsilon E^2 = \frac{1}{2}ED = \frac{D^2}{2\varepsilon_0\varepsilon} \quad (\text{Đơn vị: } \text{J/m}^3)$$</div>
+<ul class="searchable-block">
+<li>Năng lượng điện trường trong một thể tích $V$: $W = \iiint_V w \, dV = \dfrac{1}{2}\varepsilon_0\varepsilon \iiint_V E^2 \, dV$.</li>
+</ul>
+<hr>
+<div id="22-bang-cong-thuc-chuong-2" class="scroll-target"></div>
+<h3 class="section-header searchable-block">2.2. BẢNG HỆ THỐNG CÔNG THỨC CHUẨN ĐIỆN DUNG & NĂNG LƯỢNG</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 220" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <rect x="5" y="5" width="640" height="210" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="26" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 2.2: Cấu tạo 3 loại Tụ điện cơ bản (Tụ phẳng, Tụ cầu, Tụ trụ)</text>
+  
+  <!-- 1. Parallel Plate Capacitor -->
+  <rect x="40" y="60" width="8" height="110" fill="#2563eb" rx="2"/>
+  <rect x="110" y="60" width="8" height="110" fill="#dc2626" rx="2"/>
+  <line x1="48" y1="80" x2="110" y2="80" stroke="#64748b" stroke-dasharray="3"/>
+  <line x1="48" y1="115" x2="110" y2="115" stroke="#64748b" stroke-dasharray="3"/>
+  <line x1="48" y1="150" x2="110" y2="150" stroke="#64748b" stroke-dasharray="3"/>
+  <text x="32" y="52" font-size="12" font-weight="bold" fill="#2563eb">+Q</text>
+  <text x="105" y="52" font-size="12" font-weight="bold" fill="#dc2626">-Q</text>
+  <text x="65" y="185" font-size="12" fill="#475569">khoảng cách d</text>
+  <text x="35" y="202" font-size="13" font-weight="bold" fill="#1e40af">C = ε_0εS / d</text>
+  
+  <!-- 2. Spherical Capacitor -->
+  <circle cx="280" cy="115" r="28" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="280" cy="115" r="56" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="5"/>
+  <text x="272" y="120" font-size="12" font-weight="bold" fill="#2563eb">+Q</text>
+  <text x="315" y="150" font-size="12" font-weight="bold" fill="#dc2626">-Q</text>
+  <line x1="280" y1="115" x2="308" y2="115" stroke="#1e293b"/>
+  <text x="288" y="110" font-size="11" fill="#1e293b">R1</text>
+  <line x1="280" y1="115" x2="320" y2="75" stroke="#1e293b"/>
+  <text x="305" y="85" font-size="11" fill="#1e293b">R2</text>
+  <text x="210" y="202" font-size="13" font-weight="bold" fill="#1e40af">C = 4πε_0ε R1.R2 / (R2-R1)</text>
+
+  <!-- 3. Cylindrical Capacitor -->
+  <ellipse cx="510" cy="70" rx="14" ry="7" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <ellipse cx="510" cy="70" rx="36" ry="16" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+  <ellipse cx="510" cy="160" rx="14" ry="7" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <ellipse cx="510" cy="160" rx="36" ry="16" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="496" y1="70" x2="496" y2="160" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="524" y1="70" x2="524" y2="160" stroke="#2563eb" stroke-width="1.5"/>
+  <line x1="474" y1="70" x2="474" y2="160" stroke="#dc2626" stroke-width="1.5"/>
+  <line x1="546" y1="70" x2="546" y2="160" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="445" y="202" font-size="13" font-weight="bold" fill="#1e40af">C = 2πε_0ε l / ln(R2/R1)</text>
+</svg>
+<div class="diagram-caption">Ba loại tụ điện cơ bản và biểu thức tính điện dung $C$ tương ứng.</div>
+</div>
+<div class="table-container searchable-block" data-category="cong-thuc"><table><thead><tr>
+<th>Loại Tụ điện / Vật dẫn</th>
+<th>Thông số hình học</th>
+<th>Điện dung $C$</th>
+<th>Hiệu điện thế $U$ hoặc Điện trường $E$</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Quả cầu kim loại cô lập</strong></td>
+<td>Bán kính $R$</td>
+<td>$C = 4\pi\varepsilon_0\varepsilon R = \dfrac{R}{k}$</td>
+<td>$V = \dfrac{kQ}{\varepsilon R}$</td>
+</tr>
+<tr>
+<td><strong>Tụ điện phẳng</strong></td>
+<td>Diện tích bản $S$, khoảng cách $d$</td>
+<td>$C = \dfrac{\varepsilon_0\varepsilon S}{d}$</td>
+<td>$E = \dfrac{U}{d} = \dfrac{\sigma}{\varepsilon_0\varepsilon} = \dfrac{q}{\varepsilon_0\varepsilon S}$</td>
+</tr>
+<tr>
+<td><strong>Tụ điện cầu</strong></td>
+<td>Bán kính 2 mặt cầu $R_1 < R_2$</td>
+<td>$C = \dfrac{4\pi\varepsilon_0\varepsilon R_1 R_2}{R_2 - R_1}$</td>
+<td>$U = \dfrac{q(R_2 - R_1)}{4\pi\varepsilon_0\varepsilon R_1 R_2}$</td>
+</tr>
+<tr>
+<td><strong>Tụ điện trụ</strong></td>
+<td>Bán kính 2 mặt trụ $R_1 < R_2$, chiều dài $l$</td>
+<td>$C = \dfrac{2\pi\varepsilon_0\varepsilon l}{\ln(R_2 / R_1)}$</td>
+<td>$U = \dfrac{\lambda}{2\pi\varepsilon_0\varepsilon}\ln\dfrac{R_2}{R_1} = \dfrac{q}{2\pi\varepsilon_0\varepsilon l}\ln\dfrac{R_2}{R_1}$</td>
+</tr>
+<tr>
+<td><strong>Ghép tụ nối tiếp</strong></td>
+<td>$n$ tụ $C_1, C_2, \dots, C_n$</td>
+<td>$\dfrac{1}{C_b} = \sum_{i=1}^n \dfrac{1}{C_i}$</td>
+<td>$q = q_1 = q_2 = \dots$; $U = \sum U_i$</td>
+</tr>
+<tr>
+<td><strong>Ghép tụ song song</strong></td>
+<td>$n$ tụ $C_1, C_2, \dots, C_n$</td>
+<td>$C_b = \sum_{i=1}^n C_i$</td>
+<td>$U = U_1 = U_2 = \dots$; $q = \sum q_i$</td>
+</tr>
+<tr>
+<td><strong>Lực hút 2 bản tụ phẳng</strong></td>
+<td>Bản mang điện tích $q$</td>
+<td>$F = \dfrac{q^2}{2\varepsilon_0\varepsilon S} = \dfrac{1}{2}qE = \dfrac{W}{d}$</td>
+<td>Áp lực tĩnh điện: $p = \dfrac{F}{S} = \dfrac{1}{2}\varepsilon_0\varepsilon E^2 = w$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<div id="23-dang-bai-chuong-2" class="scroll-target"></div>
+<h3 class="section-header searchable-block">2.3. PHÂN LOẠI DẠNG BÀI TẬP, PHƯƠNG PHÁP GIẢI & CÔNG THỨC GIẢI NHANH</h3>
+<h4 class="sub-section-header searchable-block">Dạng 2.1: Bài toán nối hai vật dẫn kim loại tích điện bằng dây dẫn mảnh</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+</ul>
+<ol class="searchable-block">
+<li>Hai quả cầu kim loại ở xa nhau bán kính $R_1, R_2$, ban đầu tích điện $Q_1, Q_2$.</li>
+<li>Nối nhau bằng dây dẫn mảnh: Điện tích tự do dịch chuyển cho đến khi <strong>điện thế hai quả cầu bằng nhau</strong>:</li>
+</ol>
+<div class="display-math searchable-block">     $$V_1' = V_2' \iff \frac{kQ_1'}{\varepsilon R_1} = \frac{kQ_2'}{\varepsilon R_2} \implies \frac{Q_1'}{Q_2'} = \frac{R_1}{R_2}$$</div>
+<ol class="searchable-block">
+<li>Định luật bảo toàn điện tích: $Q_1' + Q_2' = Q_1 + Q_2 = Q_{\text{tổng}}$.</li>
+</ol>
+<ul class="searchable-block">
+<li><strong>Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$Q_1' = \frac{R_1}{R_1 + R_2}(Q_1 + Q_2), \quad Q_2' = \frac{R_2}{R_1 + R_2}(Q_1 + Q_2)$$</div>
+<div class="display-math searchable-block">  $$\text{Tỉ số mật độ điện mặt sau khi nối: } \frac{\sigma_1'}{\sigma_2'} = \frac{Q_1' / (4\pi R_1^2)}{Q_2' / (4\pi R_2^2)} = \frac{R_2}{R_1}$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 2.2: Thay đổi cấu trúc tụ khi (1) Giữ nối nguồn vs (2) Ngắt khỏi nguồn</h4>
+<ul class="searchable-block">
+<li><strong>Bảng so sánh biến thiên thông số (Khi khoảng cách $d$ tăng lên $\implies C \downarrow$):</strong></li>
+</ul>
+<div class="table-container searchable-block" data-category="cong-thuc"><table><thead><tr>
+<th>Thông số</th>
+<th>Khi vẫn nối nguồn ($U = \text{const}$)</th>
+<th>Khi đã ngắt nguồn ($Q = \text{const}$)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Điện dung $C$</strong></td>
+<td>Giảm ($C \propto 1/d$)</td>
+<td>Giảm ($C \propto 1/d$)</td>
+</tr>
+<tr>
+<td><strong>Hiệu điện thế $U$</strong></td>
+<td><strong>Không đổi</strong> ($U = U_{\text{nguồn}}$)</td>
+<td><strong>Tăng lên</strong> ($U = Q/C \uparrow$)</td>
+</tr>
+<tr>
+<td><strong>Điện tích $Q$</strong></td>
+<td><strong>Giảm đi</strong> ($Q = CU \downarrow$)</td>
+<td><strong>Không đổi</strong> ($Q = \text{const}$)</td>
+</tr>
+<tr>
+<td><strong>Cường độ $E$</strong></td>
+<td>Giảm đi ($E = U/d \downarrow$)</td>
+<td><strong>Không đổi</strong> ($E = \frac{Q}{\varepsilon_0\varepsilon S} = \text{const}$)</td>
+</tr>
+<tr>
+<td><strong>Năng lượng $W$</strong></td>
+<td>Giảm ($W = \frac{1}{2}CU^2 \downarrow$)</td>
+<td><strong>Tăng lên</strong> ($W = \frac{Q^2}{2C} \uparrow$, do công ngoại lực)</td>
+</tr>
+</tbody></table></div>
+<h4 class="sub-section-header searchable-block">Dạng 2.3: Công và vận tốc của electron chuyển động trong Tụ trụ và Tụ cầu</h4>
+<ul class="searchable-block">
+<li><strong>Bài toán:</strong> Electron được tăng tốc từ vị trí $r_A$ đến vị trí $r_B$ ($r_B > r_A$) bên trong tụ điện có hiệu điện thế giữa 2 bản cực là $U$.</li>
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+<li>Áp dụng định lý động năng: $\Delta W_d = \dfrac{1}{2}m_e v_e^2 - 0 = |A| = |e| \cdot |U_{AB}|$.</li>
+<li><strong>Công thức giải nhanh (Chuẩn xác, chống âm căn):</strong></li>
+<li><strong>Trong tụ trụ:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$v_e = \sqrt{\frac{2 |e| U \left|\ln(r_B / r_A)\right|}{m_e \ln(R_2 / R_1)}}$$</div>
+<ul class="searchable-block">
+<li><strong>Trong tụ cầu:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$v_e = \sqrt{\frac{2 |e| U R_1 R_2 |r_B - r_A|}{m_e (R_2 - R_1) r_A r_B}}$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 2.4: Năng lượng điện trường Quả cầu điện môi đặc vs Mặt cầu kim loại</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp giải:</strong> Sử dụng tích phân $W = \int w \, dV = \int \frac{1}{2}\varepsilon_0\varepsilon E^2 (4\pi r^2 dr)$.</li>
+<li><strong>Công thức chuẩn mực:</strong></li>
+<li><strong>Mặt cầu kim loại bán kính $R$ tích điện $Q$:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$W_{\text{trong}} = 0; \quad W_{\text{ngoài}} = \frac{Q^2}{8\pi\varepsilon_0\varepsilon R} = \frac{kQ^2}{2\varepsilon R} \implies W_{\text{tp}} = \frac{kQ^2}{2\varepsilon R}$$</div>
+<ul class="searchable-block">
+<li><strong>Quả cầu điện môi đặc bán kính $R$ tích điện đều thể tích $Q$:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$W_{\text{trong}} = \frac{Q^2}{40\pi\varepsilon_0\varepsilon R} = \frac{kQ^2}{10\varepsilon R}; \quad W_{\text{ngoài}} = \frac{Q^2}{8\pi\varepsilon_0\varepsilon R} = \frac{kQ^2}{2\varepsilon R} \implies W_{\text{tp}} = \frac{3kQ^2}{5\varepsilon R}$$</div>
+<hr>
+<div id="24-bay-thi-chuong-2" class="scroll-target"></div>
+<h3 class="section-header searchable-block">2.4. CÁC TRƯỜNG HỢP ĐẶC BIỆT & BẪY THI CẦN TRÁNH</h3>
+<div class="alert-box alert-caution searchable-block" data-category="bay-thi">
+<div class="alert-title">🔴 BẪY THI CỰC KỲ NGUY HIỂM</div>
+<p><strong>BẪY 1: Mẫu số công thức điện dung tụ trụ trong tài liệu in</strong></p>
+<p>- Một số tài liệu in thiếu dấu phân số thành: $C = \dfrac{2\pi\varepsilon_0\varepsilon l}{\ln R_2 R_1}$ (SAI).</p>
+<p>- <strong>Biểu thức bắt buộc phải là:</strong></p>
+<p>  $$C = \frac{2\pi\varepsilon_0\varepsilon l}{\ln(R_2 / R_1)}$$</p>
+</div>
+<div class="alert-box alert-warning searchable-block" data-category="bay-thi">
+<div class="alert-title">⚠️ LƯU Ý BẪY DẤU / SAI SỐ</div>
+<p><strong>BẪY 2: Bán kính và mật độ điện tích sau khi nối dây 2 quả cầu kim loại</strong></p>
+<p>- Đề thi rất hay hỏi: *"Sau khi nối dây dẫn, quả cầu nào có mật độ điện mặt $\sigma$ lớn hơn?"*</p>
+<p>- Kết quả: Điện tích quả cầu lớn nhiều hơn ($Q \propto R$), nhưng <strong>mật độ điện mặt của quả cầu nhỏ lại lớn hơn</strong> ($\sigma \propto 1/R$).</p>
+</div>
+<hr>
+<div id="chuong-3-dien-moi" class="scroll-target"></div>
+<h1 class="chapter-header searchable-block">CHƯƠNG 3: ĐIỆN MÔI</h1>
+<div id="31-ly-thuyet-chuong-3" class="scroll-target"></div>
+<h3 class="section-header searchable-block">3.1. TÓM TẮT BẢN CHẤT LÝ THUYẾT CỐT LÕI</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <defs>
+    <marker id="arr-ext" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#1e40af"/>
+    </marker>
+    <marker id="arr-ind" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="640" height="220" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="26" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 3.1: Hiện tượng phân cực điện môi & Điện trường tổng hợp</text>
+
+  <!-- Left plate (+σ) -->
+  <rect x="60" y="50" width="12" height="130" fill="#2563eb" rx="2"/>
+  <text x="52" y="42" font-size="13" font-weight="bold" fill="#2563eb">+σ</text>
+
+  <!-- Right plate (-σ) -->
+  <rect x="530" y="50" width="12" height="130" fill="#dc2626" rx="2"/>
+  <text x="522" y="42" font-size="13" font-weight="bold" fill="#dc2626">-σ</text>
+
+  <!-- Dielectric block in middle -->
+  <rect x="140" y="60" width="320" height="110" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="4"/>
+  <text x="260" y="80" font-size="14" font-weight="bold" fill="#b45309">Chất điện môi (ε)</text>
+
+  <!-- Bound charges on dielectric surfaces -->
+  <!-- Negative bound charge on left face -->
+  <rect x="142" y="62" width="16" height="106" fill="#fee2e2" rx="2"/>
+  <text x="145" y="90" font-size="14" font-weight="bold" fill="#dc2626">-</text>
+  <text x="145" y="115" font-size="14" font-weight="bold" fill="#dc2626">-</text>
+  <text x="145" y="140" font-size="14" font-weight="bold" fill="#dc2626">-</text>
+  <text x="135" y="185" font-size="13" font-weight="bold" fill="#dc2626">-σ'</text>
+
+  <!-- Positive bound charge on right face -->
+  <rect x="442" y="62" width="16" height="106" fill="#dbeafe" rx="2"/>
+  <text x="445" y="90" font-size="14" font-weight="bold" fill="#2563eb">+</text>
+  <text x="445" y="115" font-size="14" font-weight="bold" fill="#2563eb">+</text>
+  <text x="445" y="140" font-size="14" font-weight="bold" fill="#2563eb">+</text>
+  <text x="440" y="185" font-size="13" font-weight="bold" fill="#2563eb">+σ'</text>
+
+  <!-- Vectors -->
+  <!-- External field E0 -->
+  <line x1="80" y1="195" x2="400" y2="195" stroke="#1e40af" stroke-width="2.5" marker-end="url(#arr-ext)"/>
+  <text x="410" y="200" font-size="13" font-weight="bold" fill="#1e40af">E_0 (Điện trường ngoài)</text>
+
+  <!-- Bound field E' (reverse) -->
+  <line x1="380" y1="115" x2="220" y2="115" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arr-ind)"/>
+  <text x="250" y="110" font-size="13" font-weight="bold" fill="#dc2626">E' (Điện trường phụ)</text>
+
+  <!-- Resultant E -->
+  <text x="210" y="145" font-size="13.5" font-weight="bold" fill="#047857">E = E_0 - E' = E_0 / ε</text>
+  <text x="210" y="165" font-size="13" font-weight="bold" fill="#b45309">σ' = (ε-1)/ε . σ</text>
+</svg>
+<div class="diagram-caption">Sự xuất hiện của các điện tích liên kết $\pm \sigma'$ sinh ra điện trường phụ $ec{E}'$ làm suy giảm điện trường tổng hợp trong điện môi $arepsilon$ lần ($E = E_0/arepsilon$).</div>
+</div>
+<ol class="searchable-block">
+<li><strong>Bản chất hiện tượng phân cực điện môi:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Khi đặt thanh điện môi trong điện trường ngoài $\vec{E}_0$, các phân tử điện môi bị biến dạng hoặc quay định hướng $\implies$ xuất hiện các điện tích định xứ trên bề mặt (và trong lòng nếu điện môi không đồng chất) gọi là <strong>điện tích liên kết</strong>.</li>
+<li>Các điện tích liên kết này không thể dịch chuyển tự do khỏi nguyên tử/phân tử, chúng sinh ra điện trường phụ $\vec{E}'$ ngược chiều với $\vec{E}_0$ làm suy giảm điện trường tổng hợp trong lòng chất điện môi:</li>
+</ul>
+<div class="display-math searchable-block">     $$\vec{E} = \vec{E}_0 + \vec{E}' \implies E = \frac{E_0}{\varepsilon} \quad (\text{với } \varepsilon > 1)$$</div>
+<ol class="searchable-block">
+<li><strong>Véctơ phân cực điện môi ($\vec{P}_e$):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Đại lượng đo bằng tổng mômen lưỡng cực điện của các phân tử có trong một đơn vị thể tích của khối điện môi:</li>
+</ul>
+<div class="display-math searchable-block">     $$\vec{P}_e = \frac{\sum \vec{p}_{ei}}{\Delta V} = \varepsilon_0 \chi_e \vec{E} \quad (\text{Đơn vị: } \text{C/m}^2)$$</div>
+<ul class="searchable-block">
+<li>Trong đó $\chi_e$ là <strong>độ cảm điện môi</strong> (đại lượng không thứ nguyên đặc trưng cho khả năng bị phân cực của chất điện môi).</li>
+<li>Mối liên hệ với hằng số điện môi: $\varepsilon = 1 + \chi_e$.</li>
+</ul>
+<ol class="searchable-block">
+<li><strong>Mật độ điện tích liên kết mặt ($\sigma'$):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Trị số mật độ điện tích liên kết mặt bằng hình chiếu của véctơ phân cực điện môi lên pháp tuyến ngoài $\vec{n}$ của mặt giới hạn:</li>
+</ul>
+<div class="display-math searchable-block">     $$\sigma' = P_{en} = \vec{P}_e \cdot \vec{n} = P_e \cos\alpha$$</div>
+<ul class="searchable-block">
+<li>Khi mặt giới hạn vuông góc với điện trường:</li>
+</ul>
+<div class="display-math searchable-block">     $$\sigma' = P_e = \varepsilon_0 \chi_e E = (\varepsilon - 1)\varepsilon_0 E$$</div>
+<ul class="searchable-block">
+<li>Trong tụ điện phẳng lấp đầy điện môi (liên hệ với mật độ điện tích tự do $\sigma$ trên bản cực):</li>
+</ul>
+<div class="display-math searchable-block">     $$\sigma' = \frac{\varepsilon - 1}{\varepsilon}\sigma$$</div>
+<ol class="searchable-block">
+<li><strong>Véctơ cảm ứng điện (Điện cảm $\vec{D}$):</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Định nghĩa: $\vec{D} = \varepsilon_0 \vec{E} + \vec{P}_e = \varepsilon_0 (1 + \chi_e)\vec{E} = \varepsilon_0\varepsilon \vec{E}$ (Đơn vị: $\text{C/m}^2$).</li>
+<li><strong>Định lý O-G trong chất điện môi:</strong></li>
+</ul>
+<div class="display-math searchable-block">     $$\oint_{(S)} \vec{D} \cdot d\vec{S} = \sum q_{\text{tự do, trong}}$$</div>
+<p class="searchable-block">*(Ý nghĩa: Điện thông của véctơ $\vec{D}$ qua một mặt kín chỉ bằng tổng điện tích tự do chứa trong mặt kín đó, không cần quan tâm đến điện tích liên kết).*</p>
+<ol class="searchable-block">
+<li><strong>Điều kiện biên tại mặt phân cách giữa hai môi trường điện môi $(\varepsilon_1, \varepsilon_2)$:</strong></li>
+</ol>
+<ul class="searchable-block">
+<li>Thành phần tiếp tuyến của véctơ cường độ điện trường <strong>biến thiên liên tục</strong> (không đổi):</li>
+</ul>
+<div class="display-math searchable-block">     $$E_{1t} = E_{2t} \iff \frac{D_{1t}}{\varepsilon_1} = \frac{D_{2t}}{\varepsilon_2}$$</div>
+<ul class="searchable-block">
+<li>Thành phần pháp tuyến của véctơ cảm ứng điện <strong>biến thiên liên tục</strong> (không đổi):</li>
+</ul>
+<div class="display-math searchable-block">     $$D_{1n} = D_{2n} \iff \varepsilon_1 E_{1n} = \varepsilon_2 E_{2n}$$</div>
+<ul class="searchable-block">
+<li>Định luật khúc xạ đường sức điện trường:</li>
+</ul>
+<div class="display-math searchable-block">     $$\frac{\tan\alpha_1}{\tan\alpha_2} = \frac{\varepsilon_1}{\varepsilon_2}$$</div>
+<p class="searchable-block">*(với $\alpha_1, \alpha_2$ là góc giữa đường sức điện và pháp tuyến mặt phân cách).*</p>
+<hr>
+<div id="32-bang-cong-thuc-chuong-3" class="scroll-target"></div>
+<h3 class="section-header searchable-block">3.2. BẢNG HỆ THỐNG CÔNG THỨC PHÂN CỰC, ĐIỆN CẢM & ĐIỀU KIỆN BIÊN</h3>
+<div class="diagram-wrapper">
+<svg viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg" class="physics-diagram">
+  <defs>
+    <marker id="arr-e" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect x="5" y="5" width="640" height="220" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="20" y="26" font-size="14" font-weight="bold" fill="#1e3a8a">Hình 3.2: Khúc xạ đường sức điện & Điều kiện biên tại mặt phân cách hai môi trường</text>
+
+  <!-- Interface line -->
+  <line x1="50" y1="120" x2="600" y2="120" stroke="#334155" stroke-width="2.5"/>
+  <text x="520" y="105" font-size="14" font-weight="bold" fill="#0369a1">Môi trường 1 (ε_1)</text>
+  <text x="520" y="145" font-size="14" font-weight="bold" fill="#b45309">Môi trường 2 (ε_2)</text>
+
+  <!-- Normal line n -->
+  <line x1="280" y1="25" x2="280" y2="205" stroke="#94a3b8" stroke-dasharray="4" stroke-width="1.5"/>
+  <text x="288" y="40" font-size="13" font-weight="bold" fill="#64748b">pháp tuyến n</text>
+
+  <!-- Electric field vector in medium 1 (E1) -->
+  <line x1="160" y1="40" x2="280" y2="120" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-e)"/>
+  <text x="180" y="70" font-size="14" font-weight="bold" fill="#2563eb">E_1</text>
+  <!-- angle alpha 1 -->
+  <path d="M 280 85 A 35 35 0 0 0 255 103" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="250" y="80" font-size="12.5" font-weight="bold" fill="#2563eb">α_1</text>
+
+  <!-- Refracted field vector in medium 2 (E2) -->
+  <line x1="280" y1="120" x2="430" y2="195" stroke="#2563eb" stroke-width="3" marker-end="url(#arr-e)"/>
+  <text x="375" y="165" font-size="14" font-weight="bold" fill="#2563eb">E_2</text>
+  <!-- angle alpha 2 -->
+  <path d="M 280 155 A 35 35 0 0 0 310 135" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="165" font-size="12.5" font-weight="bold" fill="#2563eb">α_2</text>
+
+  <!-- Boundary rules summary box -->
+  <rect x="360" y="45" width="260" height="65" rx="6" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="370" y="65" font-size="12.5" font-weight="bold" fill="#1e40af">Tiếp tuyến: E_1t = E_2t (liên tục)</text>
+  <text x="370" y="85" font-size="12.5" font-weight="bold" fill="#1e40af">Pháp tuyến: D_1n = D_2n (liên tục)</text>
+  <text x="370" y="103" font-size="12.5" font-weight="bold" fill="#b91c1c">Khúc xạ: tan(α_1)/tan(α_2) = ε_1/ε_2</text>
+</svg>
+<div class="diagram-caption">Định luật khúc xạ đường sức điện và điều kiện biên: thành phần tiếp tuyến của $ec{E}$ và thành phần pháp tuyến của $ec{D}$ bảo toàn liên tục qua mặt phân cách.</div>
+</div>
+<div class="table-container searchable-block" data-category="cong-thuc"><table><thead><tr>
+<th>Đại lượng / Hiện tượng</th>
+<th>Biểu thức chuẩn</th>
+<th>Chú thích & Đơn vị</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Véctơ phân cực $\vec{P}_e$</strong></td>
+<td>$\vec{P}_e = \varepsilon_0 \chi_e \vec{E} = (\varepsilon - 1)\varepsilon_0 \vec{E}$</td>
+<td>Đơn vị: $\text{C/m}^2$; $\chi_e = \varepsilon - 1$</td>
+</tr>
+<tr>
+<td><strong>Véctơ điện cảm $\vec{D}$</strong></td>
+<td>$\vec{D} = \varepsilon_0 \vec{E} + \vec{P}_e = \varepsilon_0\varepsilon \vec{E}$</td>
+<td>Đơn vị: $\text{C/m}^2$</td>
+</tr>
+<tr>
+<td><strong>Mật độ điện tích liên kết $\sigma'$</strong></td>
+<td>$\sigma' = P_{en} = (\varepsilon - 1)\varepsilon_0 E_n = \dfrac{\varepsilon - 1}{\varepsilon}\sigma$</td>
+<td>Đơn vị: $\text{C/m}^2$; $\sigma$ là mật độ điện tự do</td>
+</tr>
+<tr>
+<td><strong>Điện trường trong điện môi</strong></td>
+<td>$E = \dfrac{E_0}{\varepsilon} = \dfrac{U}{d}$</td>
+<td>Giảm $\varepsilon$ lần so với trong chân không</td>
+</tr>
+<tr>
+<td><strong>Bảo toàn thành phần tiếp tuyến</strong></td>
+<td>$E_{1t} = E_{2t} \implies D_{1t} = \dfrac{\varepsilon_1}{\varepsilon_2} D_{2t}$</td>
+<td>Đường sức bị gãy khúc tại mặt phân cách</td>
+</tr>
+<tr>
+<td><strong>Bảo toàn thành phần pháp tuyến</strong></td>
+<td>$D_{1n} = D_{2n} \implies E_{1n} = \dfrac{\varepsilon_2}{\varepsilon_1} E_{2n}$</td>
+<td>Đường cảm ứng điện liên tục theo pháp tuyến</td>
+</tr>
+<tr>
+<td><strong>Định luật khúc xạ điện trường</strong></td>
+<td>$\dfrac{\tan\alpha_1}{\tan\alpha_2} = \dfrac{\varepsilon_1}{\varepsilon_2}$</td>
+<td>$\alpha$ là góc hợp với pháp tuyến $\vec{n}$</td>
+</tr>
+</tbody></table></div>
+<hr>
+<div id="33-dang-bai-chuong-3" class="scroll-target"></div>
+<h3 class="section-header searchable-block">3.3. PHÂN LOẠI DẠNG BÀI TẬP, PHƯƠNG PHÁP GIẢI & CÔNG THỨC GIẢI NHANH</h3>
+<h4 class="sub-section-header searchable-block">Dạng 3.1: Đặt tấm điện môi bề dày $d'$, hằng số $\varepsilon$ vào tụ điện phẳng (khoảng cách $d$)</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+<li>Coi hệ gồm 2 tụ điện mắc nối tiếp: một tụ không khí có bề dày $d - d'$ và một tụ điện môi có bề dày $d'$.</li>
+<li>Điện dung từng phần: $C_0 = \dfrac{\varepsilon_0 S}{d - d'}$, $C_d = \dfrac{\varepsilon_0\varepsilon S}{d'}$.</li>
+<li><strong>Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$C_{\text{mới}} = \frac{\varepsilon_0\varepsilon S}{\varepsilon(d - d') + d'} = \frac{\varepsilon_0\varepsilon S}{\varepsilon d + (1 - \varepsilon)d'} > C_{\text{cũ}}$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 3.2: Tụ điện phẳng chứa nhiều lớp điện môi</h4>
+<ul class="searchable-block">
+<li><strong>Trường hợp A: Các lớp điện môi song song với bản cực (chia theo chiều dày $d_1, d_2$):</strong></li>
+<li>Mô hình: Các tụ mắc <strong>nối tiếp</strong>.</li>
+<li>Công thức giải nhanh:</li>
+</ul>
+<div class="display-math searchable-block">    $$C = \frac{\varepsilon_0 S}{\dfrac{d_1}{\varepsilon_1} + \dfrac{d_2}{\varepsilon_2}} = \frac{\varepsilon_0\varepsilon_1\varepsilon_2 S}{\varepsilon_2 d_1 + \varepsilon_1 d_2}$$</div>
+<p class="searchable-block">*(Nếu chia đôi chiều dày $d_1 = d_2 = d/2 \implies C = \dfrac{2\varepsilon_0\varepsilon_1\varepsilon_2 S}{d(\varepsilon_1 + \varepsilon_2)})$*.</p>
+<ul class="searchable-block">
+<li><strong>Trường hợp B: Các lớp điện môi vuông góc với bản cực (chia theo diện tích $S_1, S_2$):</strong></li>
+<li>Mô hình: Các tụ mắc <strong>song song</strong>.</li>
+<li>Công thức giải nhanh:</li>
+</ul>
+<div class="display-math searchable-block">    $$C = C_1 + C_2 = \frac{\varepsilon_0\varepsilon_1 S_1}{d} + \frac{\varepsilon_0\varepsilon_2 S_2}{d}$$</div>
+<p class="searchable-block">*(Nếu chia đôi diện tích $S_1 = S_2 = S/2 \implies C = \dfrac{\varepsilon_0(\varepsilon_1 + \varepsilon_2)S}{2d} = \dfrac{1}{2}C_0(\varepsilon_1 + \varepsilon_2))$*.</p>
+<h4 class="sub-section-header searchable-block">Dạng 3.3: Tụ cầu & Tụ trụ chứa một nửa điện môi $\varepsilon$, một nửa không khí</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+<li>Đường sức điện phân bố đối xứng qua mặt ngăn cách $\implies$ hiệu điện thế trên 2 nửa như nhau $\implies$ hai nửa tụ ghép <strong>song song</strong>.</li>
+<li><strong>Công thức giải nhanh:</strong></li>
+<li><strong>Tụ cầu nửa điện môi:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$C = \frac{1}{2}C_0(\varepsilon + 1) = \frac{2\pi\varepsilon_0(\varepsilon + 1)R_1 R_2}{R_2 - R_1}$$</div>
+<ul class="searchable-block">
+<li><strong>Tụ trụ nửa điện môi:</strong></li>
+</ul>
+<div class="display-math searchable-block">    $$C = \frac{1}{2}C_0(\varepsilon + 1) = \frac{\pi\varepsilon_0(\varepsilon + 1)l}{\ln(R_2 / R_1)}$$</div>
+<h4 class="sub-section-header searchable-block">Dạng 3.4: Tính mật độ điện tích liên kết $\sigma'$ từ lực tương tác giữa 2 bản tụ</h4>
+<ul class="searchable-block">
+<li><strong>Phương pháp giải tổng quát:</strong></li>
+<li>Lực tương tác tĩnh điện giữa 2 bản tụ: $F = \dfrac{Q^2}{2\varepsilon_0\varepsilon S} \implies \sigma = \dfrac{Q}{S} = \sqrt{\dfrac{2\varepsilon_0\varepsilon F}{S}}$.</li>
+<li><strong>Công thức giải nhanh:</strong></li>
+</ul>
+<div class="display-math searchable-block">  $$\sigma' = \frac{\varepsilon - 1}{\varepsilon}\sigma = \frac{\varepsilon - 1}{\varepsilon}\sqrt{\frac{2\varepsilon_0\varepsilon F}{S}}$$</div>
+<hr>
+<div id="34-bay-thi-chuong-3" class="scroll-target"></div>
+<h3 class="section-header searchable-block">3.4. CÁC TRƯỜNG HỢP ĐẶC BIỆT & BẪY THI CẦN TRÁNH</h3>
+<div class="alert-box alert-caution searchable-block" data-category="bay-thi">
+<div class="alert-title">🔴 BẪY THI CỰC KỲ NGUY HIỂM</div>
+<p><strong>BẪY 1: Nhầm lẫn giữa tính liên tục của $\vec{E}$ và $\vec{D}$ qua mặt phân cách</strong></p>
+<p>Đề thi trắc nghiệm rất hay hỏi mệnh đề đúng/sai:</p>
+<p>- <strong>Tiếp tuyến:</strong> Véctơ $\vec{E}$ liên tục ($E_{1t} = E_{2t}$), véctơ $\vec{D}$ bị gián đoạn ($D_{1t} \neq D_{2t}$).</p>
+<p>- <strong>Pháp tuyến:</strong> Véctơ $\vec{D}$ liên tục ($D_{1n} = D_{2n}$), véctơ $\vec{E}$ bị gián đoạn ($E_{1n} \neq E_{2n}$).</p>
+<p>*(Mẹo nhớ: Chữ "E" đi với "Tiếp" - $E_t$; Chữ "D" đi với "Pháp" - $D_n$)*.</p>
+</div>
+<div class="alert-box alert-warning searchable-block" data-category="bay-thi">
+<div class="alert-title">⚠️ LƯU Ý BẪY DẤU / SAI SỐ</div>
+<p><strong>BẪY 2: Điện tích trong Định lý Gauss khi có điện môi</strong></p>
+<p>- Khi dùng véctơ điện trường $\vec{E}$: $\oint \vec{E} \cdot d\vec{S} = \dfrac{\sum (q_{\text{tự do}} + q_{\text{liên kết}})}{\varepsilon_0}$.</p>
+<p>- Khi dùng véctơ điện cảm $\vec{D}$: $\oint \vec{D} \cdot d\vec{S} = \sum q_{\text{tự do}}$ (tuyệt đối <strong>không</strong> cộng thêm $q_{\text{liên kết}}$ vì $\vec{D}$ đã bao hàm độ phân cực).</p>
+</div>
+<hr>
+<p class="searchable-block">*Tài liệu tổng hợp học thuật chuẩn mực môn PH1120 – Đại học Bách Khoa Hà Nội.*</p>
+    </main>
+</div>
+
+<!-- Floating Action Buttons -->
+<div class="floating-actions">
+    <button class="action-btn btn-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Lên đầu trang">⬆️ Đầu trang</button>
+    <button class="action-btn" onclick="window.print()">🖨️ In / Lưu PDF (Ctrl + P)</button>
+</div>
+
+<!-- Interactive Search & Filtering Script (Zero conflict with MathJax) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const searchStats = document.getElementById("searchStats");
+    const filterPills = document.querySelectorAll(".pill-btn");
+    const content = document.getElementById("mainContent");
+    
+    const c1Targets = ["chuong-1-dien-truong-tinh", "11-ly-thuyet-chuong-1", "12-bang-cong-thuc-chuong-1", "13-dang-bai-chuong-1", "14-bay-thi-chuong-1"];
+    const c2Targets = ["chuong-2-vat-dan-tu-dien", "21-ly-thuyet-chuong-2", "22-bang-cong-thuc-chuong-2", "23-dang-bai-chuong-2", "24-bay-thi-chuong-2"];
+    const c3Targets = ["chuong-3-dien-moi", "31-ly-thuyet-chuong-3", "32-bang-cong-thuc-chuong-3", "33-dang-bai-chuong-3", "34-bay-thi-chuong-3"];
+
+    function performSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+        const activeFilter = document.querySelector(".pill-btn.active").getAttribute("data-filter");
+
+        const previousMarks = content.querySelectorAll(".highlight-match");
+        previousMarks.forEach(m => {
+            const parent = m.parentNode;
+            parent.replaceChild(document.createTextNode(m.textContent), m);
+            parent.normalize();
+        });
+
+        if (!query && activeFilter === "all") {
+            const allBlocks = content.querySelectorAll(".searchable-block");
+            allBlocks.forEach(b => b.classList.remove("hidden-by-filter"));
+            searchStats.textContent = "100% Sẵn sàng";
+            return;
+        }
+
+        let matchCount = 0;
+        const blocks = content.querySelectorAll(".searchable-block");
+
+        blocks.forEach(block => {
+            let passFilter = true;
+            if (activeFilter === "bay-thi" && block.getAttribute("data-category") !== "bay-thi") passFilter = false;
+            if (activeFilter === "cong-thuc" && block.getAttribute("data-category") !== "cong-thuc") passFilter = false;
+
+            if (activeFilter === "c1" || activeFilter === "c2" || activeFilter === "c3") {
+                let el = block;
+                let ch = "";
+                while (el && el !== content) {
+                    if (el.previousElementSibling && el.previousElementSibling.classList.contains("scroll-target")) {
+                        const id = el.previousElementSibling.id;
+                        if (c1Targets.includes(id)) ch = "c1";
+                        else if (c2Targets.includes(id)) ch = "c2";
+                        else if (c3Targets.includes(id)) ch = "c3";
+                    }
+                    el = el.previousElementSibling;
+                }
+                if (ch && ch !== activeFilter) passFilter = false;
+            }
+
+            if (!passFilter) {
+                block.classList.add("hidden-by-filter");
+                return;
+            } else {
+                block.classList.remove("hidden-by-filter");
+            }
+
+            if (!query) return;
+
+            const textNodes = [];
+            function getTextNodes(node) {
+                if (node.nodeType === 3) {
+                    textNodes.push(node);
+                } else if (node.nodeType === 1) {
+                    if (node.classList && (node.classList.contains("MathJax") || node.tagName.toLowerCase() === "mjx-container" || node.tagName.toLowerCase() === "svg")) {
+                        return;
+                    }
+                    for (let child of node.childNodes) {
+                        getTextNodes(child);
+                    }
+                }
+            }
+            getTextNodes(block);
+
+            let hasMatchInBlock = false;
+            textNodes.forEach(node => {
+                const text = node.nodeValue;
+                const lowerText = text.toLowerCase();
+                const idx = lowerText.indexOf(query);
+                if (idx !== -1) {
+                    hasMatchInBlock = true;
+                    matchCount++;
+                    const before = text.substring(0, idx);
+                    const matchStr = text.substring(idx, idx + query.length);
+                    const after = text.substring(idx + query.length);
+                    
+                    const span = document.createElement("span");
+                    span.className = "highlight-match";
+                    span.textContent = matchStr;
+
+                    const frag = document.createDocumentFragment();
+                    if (before) frag.appendChild(document.createTextNode(before));
+                    frag.appendChild(span);
+                    if (after) frag.appendChild(document.createTextNode(after));
+
+                    node.parentNode.replaceChild(frag, node);
+                }
+            });
+
+            if (!hasMatchInBlock && query) {
+                block.classList.add("hidden-by-filter");
+            }
+        });
+
+        if (query) {
+            searchStats.textContent = `Tìm thấy: ${matchCount} kết quả`;
+        } else {
+            searchStats.textContent = `Đang lọc theo danh mục`;
+        }
+    }
+
+    let debounceTimer;
+    searchInput.addEventListener("input", function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(performSearch, 150);
+    });
+
+    filterPills.forEach(pill => {
+        pill.addEventListener("click", function () {
+            filterPills.forEach(p => p.classList.remove("active"));
+            this.classList.add("active");
+            performSearch();
+        });
+    });
+});
+</script>
+
+
+<script>
+// ==========================================
+// CLIENT-SIDE INDEPENDENT LOCAL STORAGE LOGIC
+// ==========================================
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. THEME SWITCHER
+    const themeBtn = document.getElementById("btnToggleTheme");
+    const savedTheme = localStorage.getItem("vldc2_theme") || "light";
+    
+    function applyTheme(theme) {
+        if (theme === "dark") {
+            document.body.classList.add("dark-mode");
+            if (themeBtn) themeBtn.textContent = "☀️ Giao diện Sáng";
+        } else {
+            document.body.classList.remove("dark-mode");
+            if (themeBtn) themeBtn.textContent = "🌙 Giao diện Tối";
+        }
+        localStorage.setItem("vldc2_theme", theme);
+    }
+    applyTheme(savedTheme);
+
+    if (themeBtn) {
+        themeBtn.addEventListener("click", function () {
+            const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+            const nextTheme = currentTheme === "dark" ? "light" : "dark";
+            applyTheme(nextTheme);
+        });
+    }
+
+    // 2. DRAWERS CONTROLLER (Bookmarks & Notes)
+    const overlay = document.getElementById("drawerOverlay");
+    const bookmarksDrawer = document.getElementById("bookmarksDrawer");
+    const notesDrawer = document.getElementById("notesDrawer");
+    const btnOpenBookmarks = document.getElementById("btnOpenBookmarks");
+    const btnCloseBookmarks = document.getElementById("btnCloseBookmarks");
+    const btnOpenNotes = document.getElementById("btnOpenNotes");
+    const btnCloseNotes = document.getElementById("btnCloseNotes");
+
+    function openDrawer(drawer) {
+        overlay.classList.add("active");
+        drawer.classList.add("active");
+    }
+
+    function closeAllDrawers() {
+        overlay.classList.remove("active");
+        if (bookmarksDrawer) bookmarksDrawer.classList.remove("active");
+        if (notesDrawer) notesDrawer.classList.remove("active");
+    }
+
+    if (overlay) overlay.addEventListener("click", closeAllDrawers);
+    if (btnOpenBookmarks) btnOpenBookmarks.addEventListener("click", () => openDrawer(bookmarksDrawer));
+    if (btnCloseBookmarks) btnCloseBookmarks.addEventListener("click", closeAllDrawers);
+    if (btnOpenNotes) btnOpenNotes.addEventListener("click", () => openDrawer(notesDrawer));
+    if (btnCloseNotes) btnCloseNotes.addEventListener("click", closeAllDrawers);
+
+    // 3. BOOKMARK MANAGEMENT
+    let bookmarks = JSON.parse(localStorage.getItem("vldc2_bookmarks") || "[]");
+    const bookmarkCountSpan = document.getElementById("bookmarkCount");
+    const bookmarksList = document.getElementById("bookmarksList");
+    const btnClearAll = document.getElementById("btnClearAllBookmarks");
+
+    function updateBookmarkCount() {
+        if (bookmarkCountSpan) bookmarkCountSpan.textContent = bookmarks.length;
+    }
+
+    function renderBookmarks() {
+        updateBookmarkCount();
+        if (!bookmarksList) return;
+        if (bookmarks.length === 0) {
+            bookmarksList.innerHTML = `<p style="color: var(--text-muted); font-size: 13.5px; text-align: center; margin-top: 40px;">
+                Chưa có mục nào được đánh dấu sao.<br>Bấm vào biểu tượng ⭐ cạnh các công thức hoặc đề mục để lưu lại xem sau.
+            </p>`;
+            return;
+        }
+
+        bookmarksList.innerHTML = bookmarks.map((bm, idx) => `
+            <div class="bookmark-item">
+                <div style="flex: 1;">
+                    <a href="#${bm.id}" class="bookmark-title" onclick="closeAllDrawers()">${bm.title}</a>
+                    <div class="bookmark-chap">${bm.chapter || 'Công thức quan trọng'}</div>
+                </div>
+                <button class="bookmark-del" title="Xóa khỏi mục đã lưu" data-id="${bm.id}">&times;</button>
+            </div>
+        `).join("");
+
+        bookmarksList.querySelectorAll(".bookmark-del").forEach(btn => {
+            btn.addEventListener("click", function(e) {
+                e.stopPropagation();
+                const id = this.getAttribute("data-id");
+                toggleBookmark(id, "", "");
+            });
+        });
+    }
+
+    function toggleBookmark(id, title, chapter) {
+        const existingIdx = bookmarks.findIndex(b => b.id === id);
+        if (existingIdx !== -1) {
+            bookmarks.splice(existingIdx, 1);
+        } else {
+            bookmarks.push({ id, title: title || id, chapter: chapter || "" });
+        }
+        localStorage.setItem("vldc2_bookmarks", JSON.stringify(bookmarks));
+        renderBookmarks();
+        updateStarButtons();
+    }
+
+    function updateStarButtons() {
+        document.querySelectorAll(".star-toggle-btn").forEach(btn => {
+            const id = btn.getAttribute("data-target-id");
+            if (bookmarks.some(b => b.id === id)) {
+                btn.classList.add("starred");
+                btn.innerHTML = "⭐";
+                btn.title = "Bỏ đánh dấu sao";
+            } else {
+                btn.classList.remove("starred");
+                btn.innerHTML = "☆";
+                btn.title = "Đánh dấu sao lưu vào máy";
+            }
+        });
+    }
+
+    // Attach star buttons to headings and formula sections
+    const targetHeadings = document.querySelectorAll(".main-content h2, .main-content h3, .main-content h4, .main-content .table-container");
+    targetHeadings.forEach((el, index) => {
+        let id = el.id;
+        if (!id) {
+            id = "sec-mark-" + index;
+            el.id = id;
+        }
+        const titleText = el.innerText ? el.innerText.trim().slice(0, 50) : "Mục học tập " + index;
+        const starBtn = document.createElement("button");
+        starBtn.className = "star-toggle-btn";
+        starBtn.setAttribute("data-target-id", id);
+        starBtn.innerHTML = "☆";
+        starBtn.title = "Đánh dấu sao lưu vào máy";
+        starBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleBookmark(id, titleText, "Chuyên đề VLDC2");
+        });
+
+        if (el.tagName.toLowerCase().startsWith("h")) {
+            el.appendChild(starBtn);
+        } else {
+            el.style.position = "relative";
+            starBtn.style.position = "absolute";
+            starBtn.style.top = "8px";
+            starBtn.style.right = "8px";
+            el.insertBefore(starBtn, el.firstChild);
+        }
+    });
+
+    if (btnClearAll) {
+        btnClearAll.addEventListener("click", function () {
+            if (confirm("Bạn có chắc chắn muốn xóa tất cả mục đã lưu?")) {
+                bookmarks = [];
+                localStorage.removeItem("vldc2_bookmarks");
+                renderBookmarks();
+                updateStarButtons();
+            }
+        });
+    }
+
+    renderBookmarks();
+    updateStarButtons();
+
+    // 4. PERSONAL STUDY NOTES
+    let currentNoteTab = "c1";
+    let notesData = JSON.parse(localStorage.getItem("vldc2_notes") || "{}");
+    const noteInput = document.getElementById("noteInput");
+    const saveIndicator = document.getElementById("saveIndicator");
+    const noteTabs = document.querySelectorAll(".note-tab-btn");
+    const btnExportNotes = document.getElementById("btnExportNotes");
+
+    function loadTabNote(tab) {
+        currentNoteTab = tab;
+        noteTabs.forEach(t => {
+            if (t.getAttribute("data-tab") === tab) t.classList.add("active");
+            else t.classList.remove("active");
+        });
+        if (noteInput) {
+            noteInput.value = notesData[tab] || "";
+        }
+    }
+
+    noteTabs.forEach(tabBtn => {
+        tabBtn.addEventListener("click", function () {
+            loadTabNote(this.getAttribute("data-tab"));
+        });
+    });
+
+    if (noteInput) {
+        let noteSaveTimer;
+        noteInput.addEventListener("input", function () {
+            if (saveIndicator) saveIndicator.innerHTML = "<span>⏳ Đang lưu...</span>";
+            clearTimeout(noteSaveTimer);
+            noteSaveTimer = setTimeout(() => {
+                notesData[currentNoteTab] = noteInput.value;
+                localStorage.setItem("vldc2_notes", JSON.stringify(notesData));
+                const now = new Date();
+                const timeStr = now.toLocaleTimeString();
+                if (saveIndicator) saveIndicator.innerHTML = `<span>✓ Đã lưu tự động lúc ${timeStr}</span>`;
+            }, 300);
+        });
+    }
+    loadTabNote("c1");
+
+    if (btnExportNotes) {
+        btnExportNotes.addEventListener("click", function () {
+            let exportContent = "=== GHI CHÚ ÔN THI VLDC2 (PH1120) ===\n\n";
+            exportContent += "--- CHƯƠNG 1 ---\n" + (notesData["c1"] || "(Trống)") + "\n\n";
+            exportContent += "--- CHƯƠNG 2 ---\n" + (notesData["c2"] || "(Trống)") + "\n\n";
+            exportContent += "--- CHƯƠNG 3 ---\n" + (notesData["c3"] || "(Trống)") + "\n\n";
+            exportContent += "--- GHI CHÚ CHUNG ---\n" + (notesData["general"] || "(Trống)") + "\n\n";
+            exportContent += "Thời gian xuất: " + new Date().toLocaleString();
+
+            const blob = new Blob([exportContent], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "VLDC2_Ghi_Chu_Ca_Nhan.txt";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+});
+</script>
+
+</body>
+</html>

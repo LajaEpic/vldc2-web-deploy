@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo Xung đột & Sai lệch Công thức VLDC2 (PH1120)</title>
+    
+    <!-- Cấu hình MathJax 3 chuẩn toán học -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: () => {
+          return MathJax.startup.defaultPageReady();
+        }
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #eff6ff;
+            --primary-dark: #1e3a8a;
+            --danger: #b91c1c;
+            --danger-bg: #fef2f2;
+            --warning: #b45309;
+            --warning-bg: #fffbeb;
+            --caution: #a16207;
+            --caution-bg: #fefce8;
+            --info: #047857;
+            --info-bg: #ecfdf5;
+            --text-main: #1f2937;
+            --text-secondary: #4b5563;
+            --border: #e5e7eb;
+            --bg-page: #f8fafc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.8;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 45px 55px;
+            border-radius: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+            border: 1px solid #edf2f7;
+        }
+
+        h1 {
+            color: var(--primary-dark);
+            font-size: 26px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 14px;
+            margin-top: 0;
+            line-height: 1.4;
+        }
+
+        h2 {
+            color: #1e3a8a;
+            font-size: 21px;
+            font-weight: 650;
+            border-bottom: 1.5px solid var(--border);
+            padding-bottom: 8px;
+            margin-top: 36px;
+        }
+
+        h3 {
+            color: #334155;
+            font-size: 17.5px;
+            font-weight: 600;
+            margin-top: 26px;
+        }
+
+        h4 {
+            color: #475569;
+            font-size: 15.5px;
+            font-weight: 600;
+            margin-top: 18px;
+        }
+
+        p, li {
+            font-size: 15px;
+            color: #27272a;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
+        }
+
+        .alert-box {
+            background-color: var(--primary-light);
+            border-left: 5px solid var(--primary);
+            padding: 14px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+            font-size: 15px;
+        }
+        .alert-box p {
+            margin: 4px 0;
+            color: #1e3a8a;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14.5px;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 14px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .display-math {
+            overflow-x: auto;
+            padding: 12px 16px;
+            margin: 16px 0;
+            background: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        code {
+            background: #f1f5f9;
+            color: #0f172a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13.5px;
+            font-family: Consolas, Monaco, monospace;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 5px;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+        .badge-danger {
+            background-color: var(--danger-bg);
+            color: var(--danger);
+            border: 1px solid #fca5a5;
+        }
+        .badge-warning {
+            background-color: var(--warning-bg);
+            color: var(--warning);
+            border: 1px solid #fcd34d;
+        }
+        .badge-caution {
+            background-color: var(--caution-bg);
+            color: var(--caution);
+            border: 1px solid #fef08a;
+        }
+        .badge-info {
+            background-color: var(--info-bg);
+            color: var(--info);
+            border: 1px solid #86efac;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(30, 64, 175, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            z-index: 999;
+        }
+        .print-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+            .print-btn { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px 20px; }
+            h1 { font-size: 22px; }
+            h2 { font-size: 18px; }
+        }
+    
+        /* --- DARK MODE PALETTE --- */
+        body.dark-mode {
+            --bg-page: #0b0f19;
+            --text-main: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #243049;
+            --primary: #3b82f6;
+            --primary-light: #1e293b;
+            --primary-dark: #60a5fa;
+            --danger-bg: #2d1519;
+            --warning-bg: #2a1f0d;
+        }
+
+        body.dark-mode .container {
+            background: #131b2e !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4 {
+            color: #93c5fd !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode table {
+            background: #131b2e !important;
+        }
+
+        body.dark-mode th {
+            background-color: #1e293b !important;
+            color: #93c5fd !important;
+            border-color: #243049 !important;
+        }
+
+        body.dark-mode td {
+            border-color: #243049 !important;
+            color: #e2e8f0 !important;
+        }
+
+        body.dark-mode tr:nth-child(even) {
+            background-color: #162035 !important;
+        }
+
+        body.dark-mode .display-math {
+            background: #0d1322 !important;
+            border-color: #243049 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode code {
+            background: #1e293b !important;
+            color: #38bdf8 !important;
+        }
+
+        body.dark-mode .top-nav-bar {
+            background: #131b2e !important;
+            border-color: #243049 !important;
+        }
+
+        /* Top Nav Bar for Report */
+        .top-nav-bar {
+            max-width: 1040px;
+            margin: 0 auto 20px auto;
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14.5px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .report-tools {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle-btn {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #334155;
+        }
+
+        body.dark-mode .theme-toggle-btn {
+            background: #1e293b;
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="top-nav-bar">
+    <a href="index.html" class="back-link">
+        ⬅️ Quay lại Sổ Tay Ôn Thi Chính (index.html)
+    </a>
+    <div class="report-tools">
+        <span style="font-size: 12px; color: var(--text-secondary);">💻 Máy Độc Lập</span>
+        <button class="theme-toggle-btn" id="btnToggleThemeReport">🌙 Giao diện Tối</button>
+    </div>
+</div>
+
+<div class="container">
+<h1>BÁO CÁO TOÀN DIỆN VỀ CÁC ĐIỂM XUNG ĐỘT, MÂU THUẪN VÀ SAI LỆCH CÔNG THỨC TRONG TÀI LIỆU VẬT LÝ ĐẠI CƯƠNG 2 (PH1120)</h1>
+<div class="alert-box">
+<p><strong>Phạm vi khảo sát:</strong> 03 Chương đầu:</p>
+<p>* <strong>Chương 1: Điện trường tĩnh</strong></p>
+<p>* <strong>Chương 2: Vật dẫn – Tụ điện</strong></p>
+<p>* <strong>Chương 3: Điện môi</strong></p>
+</div>
+<p>></p>
+<div class="alert-box">
+<p><strong>Nguồn tài liệu đối chiếu nội bộ (Notebook VLDC2):</strong></p>
+<p>1. *Công thức VLDC II ( Bản 1).pdf*</p>
+<p>2. *Công thức VLDC II ( Bản 2).pdf*</p>
+<p>3. *Chuong 1- Điện trường tĩnh.pdf* (Slide bài giảng GV Đặng Đức Dũng - PH1120)</p>
+<p>4. *Chương 2_ Vật dẫn.pdf* (Slide bài giảng GV Đặng Đức Dũng - PH1120)</p>
+<p>5. *Chương 3- Điện môi.pdf* (Slide bài giảng GV Đặng Đức Dũng - PH1120)</p>
+<p>6. *Bộ Kỹ năng A+ VLDC2 - CLB HTHT.pdf* (CLB Hỗ trợ Học tập Bách Khoa, 2026)</p>
+<p>7. *Bộ câu hỏi Lý thuyết VLDC2 2025.1 - CLB HTHT.pdf*</p>
+<p>8. *60 Câu chinh phục chương 1 VLDC II.pdf*, *Bộ 50 câu chinh phục chương 2 & 3 VLDC II.pdf*</p>
+</div>
+<hr>
+<h2>MỤC LỤC</h2>
+<ol>
+<li><a href="#1-bang-tong-hop-nhanh">Bảng tổng hợp nhanh các điểm xung đột & mức độ nghiêm trọng</a></li>
+<li><a href="#2-chuong-1-dien-truong-tinh">Phân tích chi tiết Chương 1: Điện trường tĩnh</a></li>
+</ol>
+<ul>
+<li>2.1. Điện thế bên trong và bên ngoài mặt cầu rỗng / quả cầu</li>
+<li>2.2. Dấu và biểu thức tính công của lực tĩnh điện di chuyển điện tích điểm</li>
+<li>2.3. Tỷ số logarit trong công lực điện dịch chuyển quanh dây dẫn thẳng dài</li>
+<li>2.4. Cường độ điện trường trên trục đĩa tròn bị khoét lỗ</li>
+<li>2.5. Cường độ điện trường trên trung trực thanh kim loại dài hữu hạn</li>
+<li>2.6. Sai lệch đơn vị của mật độ điện tích dài $\lambda$</li>
+<li>2.7. Quy ước thứ tự viết hằng số điện $\varepsilon_0$ và $\varepsilon$</li>
+</ul>
+<ol>
+<li><a href="#3-chuong-2-vat-dan-tu-dien">Phân tích chi tiết Chương 2: Vật dẫn – Tụ điện</a></li>
+</ol>
+<ul>
+<li>3.1. Nghịch đảo tỷ số logarit trong công & vận tốc electron trong Tụ trụ</li>
+<li>3.2. Sai dấu và nguy cơ căn bậc hai số âm trong công electron ở Tụ cầu</li>
+<li>3.3. Lỗi in ấn công thức điện dung Tụ trụ trong tài liệu CLB HTHT</li>
+<li>3.4. Nhầm lẫn giữa Quả cầu điện môi đặc và Mặt cầu kim loại rỗng</li>
+<li>3.5. Sự thiếu hụt công thức trong mục Tụ điện chứa một nửa điện môi</li>
+</ul>
+<ol>
+<li><a href="#4-chuong-3-dien-moi">Phân tích chi tiết Chương 3: Điện môi</a></li>
+</ol>
+<ul>
+<li>4.1. Ký hiệu véctơ phân cực $\vec{P}$ và độ cảm điện môi $\chi$</li>
+<li>4.2. Mối liên hệ giữa mật độ điện tích liên kết $\sigma'$ và mật độ tự do $\sigma$</li>
+<li>4.3. Ký hiệu và điều kiện biến thiên của điện cảm $\vec{D}$ và điện trường $\vec{E}$ qua mặt phân cách</li>
+</ul>
+<ol>
+<li><a href="#5-khuyen-nghi-chuan-muc">Khuyến nghị chuẩn mực khi làm bài thi trắc nghiệm & tự luận</a></li>
+</ol>
+<hr>
+<p><a name="1-bang-tong-hop-nhanh"></a></p>
+<h2>1. BẢNG TỔNG HỢP NHANH CÁC ĐIỂM XUNG ĐỘT & MỨC ĐỘ NGUY HIỂM</h2>
+<div class="table-container"><table><thead><tr>
+<th>STT</th>
+<th>Vị trí / Đại lượng</th>
+<th>'Bản 1'</th>
+<th>'Bản 2'</th>
+<th>Slide Bài giảng & CLB HTHT</th>
+<th>Mức độ nguy hiểm & Nhận xét</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>01</strong></td>
+<td><strong>Điện thế trong mặt cầu rỗng</strong></td>
+<td>$V_M = 0$</td>
+<td>$V = \frac{kq}{\varepsilon R}$</td>
+<td>$V = \frac{kq}{\varepsilon R}$ (bằng điện thế bề mặt)</td>
+<td>🔴 <strong>CỰC KỲ NGUY HIỂM</strong><br>Bản 1 nhầm lẫn giữa điện trường $E=0$ với điện thế $V=0$.</td>
+</tr>
+<tr>
+<td><strong>02</strong></td>
+<td><strong>Điện thế ngoài quả cầu</strong></td>
+<td>$V_N = \frac{q}{4\pi\varepsilon_0\varepsilon r}$</td>
+<td>$V = \frac{kq}{\varepsilon(R + r)}$</td>
+<td>$V_N = \frac{kq}{\varepsilon r}$</td>
+<td>🔴 <strong>SAI CÔNG THỨC</strong><br>Bản 2 cộng dư bán kính $R$ vào mẫu số làm sai kết quả.</td>
+</tr>
+<tr>
+<td><strong>03</strong></td>
+<td><strong>Công dịch chuyển trong dây dẫn</strong></td>
+<td>$A = \frac{q\lambda}{2\pi\varepsilon_0\varepsilon} \ln\frac{r_B}{r_A}$</td>
+<td>$A = \frac{q\lambda}{2\pi\varepsilon\varepsilon_0} \ln\frac{r_1}{r_2}$</td>
+<td>$A = q(V_A - V_B) = \frac{q\lambda}{2\pi\varepsilon_0\varepsilon}\ln\frac{r_B}{r_A}$</td>
+<td>🟠 <strong>NGHỊCH ĐẢO DẤU</strong><br>Bản 2 đảo ngược tỷ số logarit thành $\ln(r_A/r_B)$ gây sai dấu công.</td>
+</tr>
+<tr>
+<td><strong>04</strong></td>
+<td><strong>Dấu công điện tích điểm</strong></td>
+<td>Có dòng in nhầm dấu âm: $A = -\frac{qQ}{4\pi\varepsilon\varepsilon_0}(\dots)$</td>
+<td>$A = \frac{kq_0Q}{\varepsilon}\left(\frac{1}{r_A} - \frac{1}{r_B}\right)$</td>
+<td>$A_{MN} = \frac{qq_0}{4\pi\varepsilon_0\varepsilon}\left(\frac{1}{r_M} - \frac{1}{r_N}\right)$</td>
+<td>🟠 <strong>LỖI ĐÁNH MÁY</strong><br>Bản 1 có một dòng bị thừa dấu trừ ở trước phân số.</td>
+</tr>
+<tr>
+<td><strong>05</strong></td>
+<td><strong>$E$ đĩa tròn khoét lỗ</strong></td>
+<td>$E = \frac{\sigma}{2\varepsilon\varepsilon_0 \sqrt{1 + \frac{r^2}{R^2}}}$</td>
+<td>$E = \frac{\sigma}{2\varepsilon\varepsilon_0 \sqrt{1 + (r/R)^2}}$</td>
+<td>$E = \frac{\sigma}{2\varepsilon_0\varepsilon}\left[\frac{h}{\sqrt{h^2+R_1^2}} - \frac{h}{\sqrt{h^2+R_2^2}}\right]$</td>
+<td>🔴 <strong>SAI BẢN CHẤT TÍCH PHÂN</strong><br>Cả Bản 1 & 2 đều ghi sai dạng nghiệm tích phân giải tích.</td>
+</tr>
+<tr>
+<td><strong>06</strong></td>
+<td><strong>Đơn vị mật độ dài $\lambda$</strong></td>
+<td>$\text{C/m}$</td>
+<td>$\text{C/m}^3$</td>
+<td>$\text{C/m}$</td>
+<td>🟡 <strong>SAI ĐƠN VỊ</strong><br>Bản 2 nhầm đơn vị của $\lambda$ thành đơn vị mật độ khối $\rho$.</td>
+</tr>
+<tr>
+<td><strong>07</strong></td>
+<td><strong>Công electron trong tụ trụ</strong></td>
+<td>Tử số: $\ln(r_A/r_B)$</td>
+<td>Tử số: $\ln(r_B/r_A)$</td>
+<td>Tính theo tích phân thế năng</td>
+<td>🔴 <strong>XUNG ĐỘT LOGARIT</strong><br>Đảo vị trí $r_A, r_B$ làm đổi dấu công và vận tốc $v_e$.</td>
+</tr>
+<tr>
+<td><strong>08</strong></td>
+<td><strong>Vận tốc electron tụ cầu</strong></td>
+<td>Dưới căn: $r_A - r_B$</td>
+<td>Tách thành $\frac{1}{r_B} - \frac{1}{r_A}$</td>
+<td>$v = \sqrt{\frac{2</td>
+<td>e\Delta V</td>
+<td>}{m}}$</td>
+<td>🟠 <strong>NGUY CƠ ÂM CĂN THỨC</strong><br>Cả 2 bản đều không để trị tuyệt đối khi $r_B > r_A$.</td>
+</tr>
+<tr>
+<td><strong>09</strong></td>
+<td><strong>Điện dung Tụ trụ</strong></td>
+<td>$C = \frac{2\pi\varepsilon_0\varepsilon h}{\ln(R_2/R_1)}$</td>
+<td>$C = \frac{2\pi\varepsilon\varepsilon_0 l}{\ln(R_2/R_1)}$</td>
+<td>Bảng HTHT in lỗi: $C = \frac{2\pi\varepsilon_0\varepsilon l}{\ln R_2 R_1}$</td>
+<td>🟡 <strong>LỖI IN ẤN MẪU SỐ</strong><br>Bộ HTHT in liền mất dấu gạch chéo chia tỷ số $R_2/R_1$.</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><strong>Ký hiệu phân cực $\vec{P}$</strong></td>
+<td>$\vec{P} = \chi \varepsilon_0 \vec{E}$</td>
+<td>Bỏ trống không ghi</td>
+<td>$\vec{P}_e = \varepsilon_0 \chi_e \vec{E}$</td>
+<td>🟢 <strong>KHÁC BIỆT KÝ HIỆU</strong><br>Slide và HTHT dùng chỉ số hạ chân $e$ chuẩn xác.</td>
+</tr>
+<tr>
+<td><strong>11</strong></td>
+<td><strong>Tụ 1/2 điện môi</strong></td>
+<td>Ghi đủ công thức tụ cầu & trụ</td>
+<td>Bỏ trống nội dung bên dưới</td>
+<td>Ghép 2 nửa song song: $C = \frac{1}{2}C_0(\varepsilon+1)$</td>
+<td>🟡 <strong>THIẾU SÓT NỘI DUNG</strong><br>Bản 2 để trống tiêu đề mà không có công thức.</td>
+</tr>
+</tbody></table></div>
+<hr>
+<p><a name="2-chuong-1-dien-truong-tinh"></a></p>
+<h2>2. PHÂN TÍCH CHI TIẾT CHƯƠNG 1: ĐIỆN TRƯỜNG TĨNH</h2>
+<h3>2.1. Điện thế bên trong và bên ngoài mặt cầu rỗng / quả cầu mang điện</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn từ các tài liệu:</strong></li>
+<li><strong>'Công thức VLDC II ( Bản 1).pdf' (Trang 1):</strong></li>
+</ul>
+<div class="display-math">    $$\text{Điện thế do mặt cầu rỗng bán kính } R \text{ gây ra tại điểm:}$$</div>
+<div class="display-math">    $$\text{Bên trong mặt cầu } (M): \mathbf{V_M = 0.}$$</div>
+<div class="display-math">    $$\text{Bên ngoài mặt cầu } (N), \text{ cách tâm mặt cầu đoạn } r: V_N = \frac{q}{4\pi\varepsilon_0 \varepsilon r} (= Er).$$</div>
+<ul>
+<li><strong>'Công thức VLDC II ( Bản 2).pdf' (Trang 1):</strong></li>
+</ul>
+<div class="display-math">    $$\text{Cầu đặc: (} R \text{ là bán kính quả cầu, } r \text{ là khoảng cách từ tâm quả cầu đến điểm cần xét)}$$</div>
+<div class="display-math">    $$\text{+ Bên trong và bề mặt: } V = \frac{kq}{\varepsilon R}$$</div>
+<div class="display-math">    $$\text{+ Bên ngoài: } \mathbf{V = \frac{kq}{\varepsilon(R + r)}}$$</div>
+<ul>
+<li><strong>'Chuong 1- Điện trường tĩnh.pdf' (Slide GV Đặng Đức Dũng - Bài 4, Trang 53-56) & 'Bộ Kỹ năng A+ CLB HTHT' (Mục 1.3, Câu 6):</strong></li>
+</ul>
+<div class="display-math">    $$\text{Mặt cầu mang điện đều bán kính } R \text{ tích điện } q:$$</div>
+<div class="display-math">    $$\text{Bên ngoài } (r \ge R): V(r) = \frac{q}{4\pi\varepsilon_0\varepsilon r} = \frac{kq}{\varepsilon r}$$</div>
+<div class="display-math">    $$\text{Bên trong } (r < R): \vec{E} = \vec{0} \implies -\frac{dV}{dr} = 0 \implies V(r) = V_{\text{bề mặt}} = \frac{q}{4\pi\varepsilon_0\varepsilon R} = \frac{kq}{\varepsilon R}$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+</ul>
+<ol>
+<li><strong>Lỗi nghiêm trọng ở Bản 1:</strong> Bản 1 khẳng định $V_M = 0$ bên trong mặt cầu rỗng. Đây là lỗi nhầm lẫn tai hại giữa <strong>cường độ điện trường</strong> ($E_{\text{trong}} = 0$) và <strong>điện thế</strong> ($V$). Vì $E = -\frac{dV}{dr} = 0$, nên $V(r) = \text{const}$ từ tâm ra đến bề mặt mặt cầu, do đó $V_{\text{trong}} = V_{\text{mặt}} = \frac{kq}{\varepsilon R} \neq 0$ (với mốc thế năng ở vô cùng).</li>
+<li><strong>Lỗi nghiêm trọng ở Bản 2:</strong> Bản 2 viết công thức bên ngoài là $V = \frac{kq}{\varepsilon(R + r)}$. Nếu $r$ đã là khoảng cách từ tâm (như định nghĩa ở dòng trên của chính Bản 2), thì mẫu số đã bị cộng dư một lượng bán kính $R$. Công thức chuẩn xác bắt buộc phải là $\frac{kq}{\varepsilon r}$.</li>
+</ol>
+<ul>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<div class="display-math">  $$\begin{cases} V(r) = \dfrac{q}{4\pi\varepsilon_0\varepsilon R} = \dfrac{kq}{\varepsilon R} & \text{với } r \le R \text{ (bên trong và bề mặt)} \\ V(r) = \dfrac{q}{4\pi\varepsilon_0\varepsilon r} = \dfrac{kq}{\varepsilon r} & \text{với } r > R \text{ (bên ngoài)} \end{cases}$$</div>
+<hr>
+<h3>2.2. Dấu và biểu thức tính công của lực tĩnh điện dịch chuyển điện tích điểm</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn từ các tài liệu:</strong></li>
+<li><strong>'Công thức VLDC II ( Bản 1).pdf' (Trang 1, Mục 4):</strong></li>
+</ul>
+<div class="display-math">    $$A = q \int_{r_A}^{r_B} E dr = \mathbf{-\frac{qQ}{4\pi\varepsilon\varepsilon_0}\left(\frac{1}{r_A} - \frac{1}{r_B}\right)}$$</div>
+<p>*(Tuy nhiên, ở ví dụ bên dưới lại viết dấu dương: $A = \frac{qQ}{4\pi\varepsilon_0\varepsilon}\left(\frac{1}{r_A} - \frac{1}{r_B}\right)$)*.</p>
+<ul>
+<li><strong>'Công thức VLDC II ( Bản 2).pdf' (Trang 1):</strong></li>
+</ul>
+<div class="display-math">    $$A_{AB} = \frac{kq_0 Q}{\varepsilon}\left(\frac{1}{r_A} - \frac{1}{r_B}\right)$$</div>
+<ul>
+<li><strong>'Chuong 1- Điện trường tĩnh.pdf' (Slide 44-46) & 'CLB HTHT' (Câu 4, Trang 8):</strong></li>
+</ul>
+<div class="display-math">    $$A_{MN} = \int_{r_M}^{r_N} \frac{q q_0 dr}{4\pi\varepsilon_0\varepsilon r^2} = q_0(V_M - V_N) = \frac{q q_0}{4\pi\varepsilon_0\varepsilon}\left(\frac{1}{r_M} - \frac{1}{r_N}\right)$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+<li>Trong Bản 1, tác giả lấy tích phân $\int_{r_A}^{r_B} E dr$ nhưng quên rằng $E = \frac{qQ}{4\pi\varepsilon_0\varepsilon r^2}$ có nguyên hàm là $-\frac{1}{r}$, khi thế cận từ $r_A$ đến $r_B$ sẽ được $-\left(\frac{1}{r_B} - \frac{1}{r_A}\right) = +\left(\frac{1}{r_A} - \frac{1}{r_B}\right)$. Do đó, dấu "$-$" ở phía trước phân số trong Bản 1 là một <strong>lỗi in ấn / lỗi biên soạn sai</strong>.</li>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<p>Luôn bám sát định nghĩa công qua hiệu điện thế:</p>
+<div class="display-math">  $$A_{MN} = q_0(V_M - V_N) = \frac{q q_0}{4\pi\varepsilon_0\varepsilon}\left(\frac{1}{r_M} - \frac{1}{r_N}\right)$$</div>
+<hr>
+<h3>2.3. Tỷ số logarit trong công lực điện dịch chuyển quanh dây dẫn thẳng dài</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1' (Mục 4):</strong></li>
+</ul>
+<div class="display-math">    $$A = q \int_{r_A}^{r_B} E dr = \frac{q\lambda}{2\pi\varepsilon_0 \varepsilon} \mathbf{\ln\frac{r_B}{r_A}}$$</div>
+<ul>
+<li><strong>'Bản 2' (Mục 3):</strong></li>
+</ul>
+<div class="display-math">    $$A = \frac{q\lambda}{2\pi\varepsilon\varepsilon_0} \mathbf{\ln\frac{r_1}{r_2}}$$</div>
+<ul>
+<li><strong>Slide Ch.1 & CLB HTHT:</strong></li>
+</ul>
+<p>Biểu thức điện trường do dây dẫn thẳng dài vô hạn gây ra tại khoảng cách $r$:</p>
+<div class="display-math">    $$E = \frac{\lambda}{2\pi\varepsilon_0\varepsilon r}$$</div>
+<p>Hiệu điện thế giữa hai điểm cách trục các khoảng $r_A$ và $r_B$:</p>
+<div class="display-math">    $$V_A - V_B = \int_{r_A}^{r_B} E dr = \frac{\lambda}{2\pi\varepsilon_0\varepsilon} \ln\frac{r_B}{r_A}$$</div>
+<p>Do đó công lực điện dịch chuyển điện tích $q$ từ điểm $A$ đến điểm $B$ là:</p>
+<div class="display-math">    $$A_{AB} = q(V_A - V_B) = \frac{q\lambda}{2\pi\varepsilon_0\varepsilon} \ln\frac{r_B}{r_A}$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+<li>Nếu gọi điểm đầu là $1$ ($r_1 = r_A$) và điểm cuối là $2$ ($r_2 = r_B$), thì Bản 2 ghi $\ln(r_1/r_2)$ chính là $\ln(r_A/r_B) = -\ln(r_B/r_A)$.</li>
+<li><strong>Như vậy Bản 2 bị ngược dấu hoàn toàn so với Bản 1!</strong></li>
+<li>*Kiểm chứng trực quan:* Giả sử một điện tích dương $q > 0$ được thả gần một dây tích điện dương ($\lambda > 0$). Lực điện sẽ đẩy $q$ ra xa (từ $r_A$ ra $r_B$ với $r_B > r_A$). Vì chuyển động cùng chiều lực điện trường, công của lực điện trường bắt buộc phải <strong>dương ($A > 0$)</strong>.</li>
+<li>Ở Bản 1: Vì $r_B > r_A \implies \frac{r_B}{r_A} > 1 \implies \ln\frac{r_B}{r_A} > 0 \implies A > 0$ (ĐÚNG).</li>
+<li>Ở Bản 2: $\frac{r_1}{r_2} = \frac{r_A}{r_B} < 1 \implies \ln\frac{r_1}{r_2} < 0 \implies A < 0$ (SAI HOÀN TOÀN VỀ DẤU).</li>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<div class="display-math">  $$A_{A \to B} = \frac{q\lambda}{2\pi\varepsilon_0\varepsilon} \ln\frac{r_B}{r_A}$$</div>
+<hr>
+<h3>2.4. Cường độ điện trường trên trục đĩa tròn bị khoét lỗ</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1':</strong></li>
+</ul>
+<div class="display-math">    $$E = \frac{\sigma}{2\varepsilon\varepsilon_0 \sqrt{1 + \frac{r^2}{R^2}}}$$</div>
+<ul>
+<li><strong>'Bản 2':</strong></li>
+</ul>
+<div class="display-math">    $$E = \frac{\sigma}{2\varepsilon\varepsilon_0 \sqrt{1 + (r/R)^2}} \quad \text{hoặc} \quad E = \frac{\sigma}{2\varepsilon\varepsilon_0 \sqrt{1 + (a/b)^2}}$$</div>
+<ul>
+<li><strong>Slide Ch.1 (Bài 3) & CLB HTHT (Mục 1.4, Bài 5):</strong></li>
+</ul>
+<p>Điện trường của đĩa tròn bán kính $R$ trên trục cách tâm khoảng $h$:</p>
+<div class="display-math">    $$E_{\text{đĩa}}(R) = \frac{\sigma}{2\varepsilon_0\varepsilon}\left(1 - \frac{h}{\sqrt{R^2 + h^2}}\right)$$</div>
+<p>Do nguyên lý chồng chất điện trường, khi một đĩa bán kính ngoài $R_2$ bị khoét một lỗ bán kính trong $R_1$:</p>
+<div class="display-math">    $$E = E_{\text{đĩa}}(R_2) - E_{\text{đĩa}}(R_1) = \frac{\sigma}{2\varepsilon_0\varepsilon}\left[\frac{h}{\sqrt{R_1^2 + h^2}} - \frac{h}{\sqrt{R_2^2 + h^2}}\right]$$</div>
+<p>Trường hợp mặt phẳng vô hạn ($R_2 \to \infty$) bị khoét một lỗ bán kính $a$, tính tại điểm trên trục cách tâm lỗ đoạn $b$:</p>
+<div class="display-math">    $$E = \frac{\sigma}{2\varepsilon_0\varepsilon}\left[\frac{b}{\sqrt{a^2 + b^2}} - 0\right] = \frac{\sigma}{2\varepsilon_0\varepsilon \sqrt{1 + (a/b)^2}}$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+<li>Công thức $\frac{\sigma}{2\varepsilon_0\varepsilon \sqrt{1 + (a/b)^2}}$ trong Bản 2 chỉ đúng cho trường hợp riêng: <strong>Mặt phẳng vô hạn khoét lỗ</strong>, nhưng Bản 1 và Bản 2 lại giật tiêu đề là *"Đĩa tròn bán kính R bị khoét lỗ bán kính r"* mà lại không có biến số độ cao $h$ hay bán kính ngoài $R_2$. Đây là sự chép thiếu đề bài và nhầm lẫn ngữ cảnh bài toán gốc.</li>
+</ul>
+<hr>
+<h3>2.5. Cường độ điện trường trên trung trực thanh kim loại dài hữu hạn</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1':</strong> $E = \frac{q}{4\pi\varepsilon_0 \varepsilon h R}$ *(với $h$: khoảng cách đến thanh, $R$: khoảng cách từ điểm khảo sát đến đầu mút thanh)*.</li>
+<li><strong>'Bản 2':</strong> $E = \frac{kq}{\varepsilon R R_0}$ *(với $R_0$: khoảng cách đến thanh, $R$: khoảng cách đến đầu mút)*.</li>
+<li><strong>Slide Ch.1 & CLB HTHT:</strong></li>
+</ul>
+<div class="display-math">    $$E = \frac{kq}{a \sqrt{a^2 + (L/2)^2}} = \frac{\lambda L}{2\pi\varepsilon_0\varepsilon a \sqrt{L^2 + 4a^2}}$$</div>
+<ul>
+<li><strong>Nhận xét:</strong></li>
+</ul>
+<p>Hai bản tóm tắt thực chất mô tả cùng một công thức vì $R = \sqrt{h^2 + (L/2)^2}$, nhưng đặt tên biến khác nhau hoàn toàn ($h$ đối đầu $R_0$) mà không có hình vẽ chú thích rõ ràng, gây hiểu lầm cho người học nếu không nắm chắc hình học.</p>
+<hr>
+<h3>2.6. Sai lệch đơn vị của mật độ điện tích dài $\lambda$</h3>
+<ul>
+<li><strong>Trích dẫn từ 'Bản 2' (Mục 6):</strong></li>
+</ul>
+<div class="display-math">  $$\text{Với } \lambda = \frac{q}{l} \mathbf{(C/m^3)} \text{ là mật độ điện dài}$$</div>
+<ul>
+<li><strong>Phân tích:</strong></li>
+<li>Đơn vị của mật độ điện tích dài $\lambda = \frac{q}{l}$ bắt buộc phải là Coulomb trên mét: $\mathbf{C/m}$.</li>
+<li>Đơn vị $\text{C/m}^3$ là của mật độ điện tích khối $\rho = \frac{q}{V}$.</li>
+<li>Bản 1 và Slide đều ghi đúng là $\text{C/m}$. Đây là lỗi đánh máy thiếu chuẩn xác trong Bản 2.</li>
+</ul>
+<hr>
+<h3>2.7. Quy ước thứ tự viết hằng số điện $\varepsilon_0$ và $\varepsilon$</h3>
+<ul>
+<li><strong>Quan sát:</strong></li>
+<li>'Bản 1': Thường viết lộn xộn giữa $\varepsilon_0\varepsilon$ và $\varepsilon\varepsilon_0$.</li>
+<li>'Bản 2': Đa số viết $\varepsilon\varepsilon_0$.</li>
+<li>Slide PH1120 và Bộ CLB HTHT: Luôn viết chuẩn mực $\varepsilon_0\varepsilon$ theo hệ thống công thức giáo trình Bách Khoa Hà Nội.</li>
+<li>*Hằng số điện trong chân không:* $\varepsilon_0 = 8{,}86 \cdot 10^{-12} \, \text{C}^2/(\text{N}\cdot\text{m}^2)$ (hoặc $\text{F/m}$), $k = \frac{1}{4\pi\varepsilon_0} = 9 \cdot 10^9 \, \text{N}\cdot\text{m}^2/\text{C}^2$.</li>
+</ul>
+<hr>
+<p><a name="3-chuong-2-vat-dan-tu-dien"></a></p>
+<h2>3. PHÂN TÍCH CHI TIẾT CHƯƠNG 2: VẬT DẪN – TỤ ĐIỆN</h2>
+<h3>3.1. Nghịch đảo tỷ số logarit trong công & vận tốc electron trong Tụ trụ</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1' (Chương 2, Mục 4):</strong></li>
+</ul>
+<div class="display-math">    $$A = \frac{e U \mathbf{\ln(r_A / r_B)}}{\ln(R_2 / R_1)}$$</div>
+<div class="display-math">    $$v = \sqrt{\frac{2e U \mathbf{\ln(r_A / r_B)}}{m \ln(R_2 / R_1)}}$$</div>
+<ul>
+<li><strong>'Bản 2' (Chương 2, Mục 4):</strong></li>
+</ul>
+<div class="display-math">    $$A = \frac{e U_0 \mathbf{\ln(r_B / r_A)}}{\ln(R_2 / R_1)}$$</div>
+<div class="display-math">    $$v_e = \sqrt{\frac{2e U_0 \mathbf{\ln(r_B / r_A)}}{m \ln(R_2 / R_1)}}$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+<li>Đề bài quy ước rõ: *Electron chuyển động từ điểm $A$ đến điểm $B$ với $r_B > r_A$ (tức electron bay ra xa trục)*.</li>
+<li>Xét về toán học: Vì $r_B > r_A \implies \frac{r_A}{r_B} < 1 \implies \mathbf{\ln(r_A / r_B) < 0}$.</li>
+<li>Trong công thức của <strong>Bản 1</strong>, tử số là $\ln(r_A/r_B)$ là một số <strong>ÂM</strong>. Nếu đưa vào công thức vận tốc $v = \sqrt{\frac{2A}{m}}$, đại lượng dưới dấu căn sẽ bị <strong>ÂM</strong>, dẫn đến biểu thức vô nghiệm thực!</li>
+<li><strong>Bản 2</strong> dùng tử số $\ln(r_B/r_A) > 0$, đảm bảo biểu thức dưới căn dương (với điều kiện bản trong tích điện âm đẩy electron đi ra).</li>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<p>Để tránh mọi sai sót về dấu do phụ thuộc vào bản trong/ngoài tích điện âm hay dương:</p>
+<div class="display-math">  $$|A| = \frac{|e| U \left|\ln(r_B / r_A)\right|}{\ln(R_2 / R_1)} \implies v_e = \sqrt{\frac{2 |A|}{m}}$$</div>
+<hr>
+<h3>3.2. Sai dấu và nguy cơ căn bậc hai số âm trong công electron ở Tụ cầu</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1':</strong></li>
+</ul>
+<div class="display-math">    $$A = \frac{e U R_1 R_2 (r_A - r_B)}{(R_2 - R_1) r_A r_B}$$</div>
+<div class="display-math">    $$v = \sqrt{\frac{2e U R_1 R_2 \mathbf{(r_A - r_B)}}{m (R_2 - R_1) r_A r_B}}$$</div>
+<ul>
+<li><strong>'Bản 2':</strong></li>
+</ul>
+<div class="display-math">    $$A = \frac{e U_0 R_1 R_2}{R_2 - R_1}\left(\frac{1}{r_B} - \frac{1}{r_A}\right) = \frac{e U_0 R_1 R_2 (r_A - r_B)}{(R_2 - R_1) r_A r_B}$$</div>
+<div class="display-math">    $$v_e = \sqrt{\frac{2e U_0 R_1 R_2 \mathbf{(r_A - r_B)}}{m (R_2 - R_1) r_A r_B}}$$</div>
+<ul>
+<li><strong>Bản chất vật lý và Xung đột:</strong></li>
+<li>Giả thiết bài toán nêu: $r_B > r_A \implies r_A - r_B < 0$.</li>
+<li>Cả Bản 1 và Bản 2 đều để nguyên cụm $(r_A - r_B)$ trong căn bậc hai của biểu thức tính vận tốc mà không giải thích điều kiện bản cực nào nối cực âm/dương của nguồn $U$. Nếu làm máy móc theo công thức này, số dưới căn sẽ bị âm.</li>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<div class="display-math">  $$v_e = \sqrt{\frac{2 |e| U R_1 R_2 |r_A - r_B|}{m (R_2 - R_1) r_A r_B}}$$</div>
+<hr>
+<h3>3.3. Lỗi in ấn công thức điện dung Tụ trụ trong tài liệu CLB HTHT</h3>
+<ul>
+<li><strong>Trích dẫn từ 'Bộ Kỹ năng A+ VLDC2 - CLB HTHT' (Mục 2.1, Bảng tóm tắt trang 26):</strong></li>
+</ul>
+<div class="display-math">  $$C = \frac{2\pi\varepsilon_0\varepsilon l}{\mathbf{\ln R_2 R_1}}$$</div>
+<ul>
+<li><strong>Đối chiếu với các nguồn khác:</strong></li>
+<li>Bản 1: $C = \frac{2\pi\varepsilon_0\varepsilon h}{\ln(R_2 / R_1)}$</li>
+<li>Bản 2: $C = \frac{2\pi\varepsilon\varepsilon_0 l}{\ln(R_2 / R_1)}$</li>
+<li>Slide GV Đặng Đức Dũng (Bài 1, Trang 11): $C = \frac{2\pi\varepsilon\varepsilon_0 l}{\ln(R_2 / R_1)}$</li>
+<li><strong>Nhận xét:</strong></li>
+<li>Tài liệu của CLB HTHT đã in thiếu dấu gạch phân số bên trong logarit: $\ln R_2 R_1$ thay vì $\ln(R_2 / R_1)$. Đây là lỗi gõ LaTeX (<code>\ln R_2 R_1</code> thay vì <code>\ln \frac{R_2}{R_1}</code>). Sinh viên học vẹt từ bảng tóm tắt sẽ áp dụng sai hoàn toàn.</li>
+</ul>
+<hr>
+<h3>3.4. Nhầm lẫn giữa Quả cầu điện môi đặc và Mặt cầu kim loại rỗng</h3>
+<ul>
+<li><strong>Năng lượng tĩnh điện quả cầu điện môi bán kính $R$ tích điện $Q$ phân bố đều thể tích:</strong></li>
+<li><strong>'Bản 1' (Chương 2):</strong></li>
+</ul>
+<div class="display-math">    $$W_{\text{trong}} = \int_0^R \frac{1}{2}\varepsilon_0\varepsilon E_{\text{trong}}^2 \cdot 4\pi r^2 dr = \mathbf{\frac{Q^2}{40\pi\varepsilon_0\varepsilon R}} = \frac{k Q^2}{10\varepsilon R}$$</div>
+<div class="display-math">    $$W_{\text{ngoài}} = \int_R^\infty \frac{1}{2}\varepsilon_0\varepsilon E_{\text{ngoài}}^2 \cdot 4\pi r^2 dr = \mathbf{\frac{Q^2}{8\pi\varepsilon_0\varepsilon R}} = \frac{k Q^2}{2\varepsilon R}$$</div>
+<div class="display-math">    $$\text{Tổng năng lượng toàn không gian: } W_{\text{tp}} = W_{\text{trong}} + W_{\text{ngoài}} = \frac{3 Q^2}{20\pi\varepsilon_0\varepsilon R} = \frac{3 k Q^2}{5\varepsilon R}$$</div>
+<ul>
+<li><strong>'Bản 2':</strong> Chép lại công thức này nhưng ký hiệu đề mục là $q$, còn trong biểu thức lại là $Q$.</li>
+<li><strong>Bộ CLB HTHT (Bài tập 11):</strong></li>
+</ul>
+<p>Xét bài toán *Mặt cầu kim loại bán kính $R$ tích điện $Q$*. Vì kim loại có $E_{\text{trong}} = 0 \implies W_{\text{trong}} = 0$, năng lượng toàn phần chỉ có ở ngoài:</p>
+<div class="display-math">    $$W = W_{\text{ngoài}} = \frac{Q^2}{8\pi\varepsilon_0\varepsilon R} = \frac{k Q^2}{2\varepsilon R}$$</div>
+<ul>
+<li><strong>Lưu ý quan trọng khi thi:</strong></li>
+</ul>
+<p>Rất nhiều sinh viên nhầm giữa <strong>Quả cầu điện môi đặc</strong> (có năng lượng cả trong lẫn ngoài, tổng là $\frac{3 k Q^2}{5\varepsilon R}$) với <strong>Mặt cầu kim loại</strong> (chỉ có năng lượng bên ngoài là $\frac{k Q^2}{2\varepsilon R}$).</p>
+<hr>
+<h3>3.5. Sự thiếu hụt công thức trong mục Tụ điện chứa một nửa điện môi</h3>
+<ul>
+<li><strong>Đối chiếu:</strong></li>
+<li><strong>Bản 1:</strong> Liệt kê đầy đủ cho tụ cầu và tụ trụ khi lấp điện môi vào 1 nửa:</li>
+</ul>
+<div class="display-math">    $$C_{\text{cầu}} = \frac{2\pi\varepsilon_0 (\varepsilon + 1) R_1 R_2}{R_2 - R_1} = \frac{1}{2} C_0 (\varepsilon + 1)$$</div>
+<div class="display-math">    $$C_{\text{trụ}} = \frac{\pi\varepsilon_0 (\varepsilon + 1) l}{\ln(R_2 / R_1)} = \frac{1}{2} C_0 (\varepsilon + 1)$$</div>
+<ul>
+<li><strong>Bản 2:</strong> Tạo đầu mục *"Tụ điện một nửa điện môi một nửa không khí"* nhưng bỏ trống phần công thức hoặc in không đầy đủ.</li>
+</ul>
+<hr>
+<p><a name="4-chuong-3-dien-moi"></a></p>
+<h2>4. PHÂN TÍCH CHI TIẾT CHƯƠNG 3: ĐIỆN MÔI</h2>
+<h3>4.1. Ký hiệu véctơ phân cực $\vec{P}$ và độ cảm điện môi $\chi$</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1':</strong> $\vec{P} = \chi \varepsilon_0 \vec{E}$ và $\varepsilon = 1 + \chi$ (không có chỉ số dưới).</li>
+<li><strong>'Bản 2':</strong> Hoàn toàn không trình bày biểu thức véctơ phân cực.</li>
+<li><strong>Slide Ch.3 & CLB HTHT:</strong></li>
+</ul>
+<div class="display-math">    $$\vec{P}_e = \varepsilon_0 \chi_e \vec{E} \quad \text{và} \quad \varepsilon = 1 + \chi_e$$</div>
+<p>*(Chỉ số $e$ viết tắt của Electric, để phân biệt với độ cảm từ $\chi_m$ trong chương Từ trường).*</p>
+<ul>
+<li><strong>Khuyên dùng khi thi:</strong></li>
+</ul>
+<p>Khi làm bài thi tự luận hoặc kiểm tra giữa kỳ, luôn dùng ký hiệu chuẩn $\vec{P}_e$ và $\chi_e$ để tránh nhầm lẫn sang chương Từ học.</p>
+<hr>
+<h3>4.2. Mối liên hệ giữa mật độ điện tích liên kết $\sigma'$ và mật độ tự do $\sigma$</h3>
+<ul>
+<li><strong>Trích dẫn nguyên văn:</strong></li>
+<li><strong>'Bản 1':</strong></li>
+</ul>
+<div class="display-math">    $$\sigma' = P_n = \chi\varepsilon_0 E_n = (\varepsilon - 1)\varepsilon_0 E_n = (\varepsilon - 1)\varepsilon_0 \frac{U}{d}$$</div>
+<ul>
+<li><strong>'Bản 2':</strong></li>
+</ul>
+<div class="display-math">    $$\sigma' = (\varepsilon - 1)\varepsilon_0 E = \mathbf{\frac{\varepsilon - 1}{\varepsilon}\sigma}$$</div>
+<ul>
+<li><strong>Slide Ch.3 & CLB HTHT (Bài tập 12 & 13):</strong></li>
+</ul>
+<p>Vì trong tụ điện có điện môi, cường độ điện trường tổng hợp là $E = \frac{\sigma}{\varepsilon\varepsilon_0}$. Thay vào biểu thức của $\sigma'$:</p>
+<div class="display-math">    $$\sigma' = (\varepsilon - 1)\varepsilon_0 E = (\varepsilon - 1)\varepsilon_0 \frac{\sigma}{\varepsilon\varepsilon_0} = \frac{\varepsilon - 1}{\varepsilon}\sigma$$</div>
+<ul>
+<li><strong>Nhận xét:</strong></li>
+<li>Cả hai bản đều đúng về bản chất, nhưng Bản 2 có thêm công thức tính nhanh $\sigma' = \frac{\varepsilon - 1}{\varepsilon}\sigma$ rất hữu ích khi làm trắc nghiệm dạng bài cho mật độ điện tích trên bản cực kim loại $\sigma$ để tìm mật độ điện tích cảm ứng trên điện môi $\sigma'$.</li>
+</ul>
+<hr>
+<h3>4.3. Biến thiên của điện cảm $\vec{D}$ và điện trường $\vec{E}$ qua mặt phân cách</h3>
+<ul>
+<li><strong>Trích dẫn từ Slide GV Đặng Đức Dũng (Bài 2, Trang 10-12):</strong></li>
+<li>Thành phần tiếp tuyến của điện trường: <strong>liên tục</strong></li>
+</ul>
+<div class="display-math">    $$E_{1t} = E_{2t} \implies \frac{D_{1t}}{\varepsilon_1} = \frac{D_{2t}}{\varepsilon_2} \implies D_{1t} = \frac{\varepsilon_1}{\varepsilon_2} D_{2t}$$</div>
+<ul>
+<li>Thành phần pháp tuyến của điện trường: <strong>không liên tục</strong></li>
+</ul>
+<div class="display-math">    $$\varepsilon_1 E_{1n} = \varepsilon_2 E_{2n}$$</div>
+<ul>
+<li>Thành phần pháp tuyến của véctơ điện cảm: <strong>liên tục</strong></li>
+</ul>
+<div class="display-math">    $$D_{1n} = D_{2n}$$</div>
+<ul>
+<li><strong>Nhận xét:</strong></li>
+</ul>
+<p>Cả Bản 1 và Bản 2 đều <strong>bỏ qua hoàn toàn</strong> các hệ thức điều kiện biên này, trong khi đề thi trắc nghiệm giữa kỳ (như trong các Đề 01 - 15) thường xuyên hỏi về tính liên tục của $E_t, E_n, D_t, D_n$.</p>
+<hr>
+<p><a name="5-khuyen-nghi-chuan-muc"></a></p>
+<h2>5. KHUYẾN NGHỊ CHUẨN MỰC KHI LÀM BÀI THI & TỰ LUẬN (PH1120)</h2>
+<ol>
+<li><strong>Về hằng số:</strong></li>
+</ol>
+<ul>
+<li>Sử dụng $\varepsilon_0 = 8{,}86 \cdot 10^{-12} \, \text{C}^2/(\text{N}\cdot\text{m}^2)$, $k = 9 \cdot 10^9 \, \text{N}\cdot\text{m}^2/\text{C}^2$.</li>
+<li>Luôn viết $\varepsilon_0\varepsilon$ ở mẫu số.</li>
+</ul>
+<ol>
+<li><strong>Về điện thế cầu:</strong></li>
+</ol>
+<ul>
+<li>Ghi nhớ: Điện thế bên trong mặt cầu kim loại cân bằng tĩnh điện <strong>luôn bằng điện thế trên bề mặt</strong> ($V = \frac{kq}{\varepsilon R}$), tuyệt đối không viết $V = 0$ như trong Bản 1.</li>
+</ul>
+<ol>
+<li><strong>Về bài toán tính công $A$:</strong></li>
+</ol>
+<ul>
+<li>Để không bao giờ bị sai dấu logarit ($\ln\frac{r_A}{r_B}$ hay $\ln\frac{r_B}{r_A}$), luôn xác định:</li>
+<li>Chiều dịch chuyển cùng chiều lực điện trường $\implies A > 0$.</li>
+<li>Chiều dịch chuyển ngược chiều lực điện trường $\implies A < 0$.</li>
+<li>Luôn lấy độ lớn $|A| = |q \Delta V|$ khi tính động năng và vận tốc electron.</li>
+</ul>
+<ol>
+<li><strong>Về tụ điện:</strong></li>
+</ol>
+<ul>
+<li>Công thức điện dung tụ trụ chuẩn mực: $C = \frac{2\pi\varepsilon_0\varepsilon l}{\ln(R_2/R_1)}$ (chú ý tỷ số chia $R_2/R_1$ bên trong hàm ln).</li>
+<li>Mật độ điện tích liên kết: $\sigma' = \frac{\varepsilon - 1}{\varepsilon}\sigma$.</li>
+</ul>
+<hr>
+<p>*Tài liệu được tổng hợp và đối chiếu tự động, bảo toàn 100% định dạng toán học từ dữ liệu nguồn gốc Notebook VLDC2.*</p>
+</div>
+
+<button class="print-btn" onclick="window.print()">
+    🖨️ In Báo cáo / Lưu PDF (Ctrl + P)
+</button>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const themeBtn = document.getElementById("btnToggleThemeReport");
+    const savedTheme = localStorage.getItem("vldc2_theme") || "light";
+    
+    function applyTheme(theme) {
+        if (theme === "dark") {
+            document.body.classList.add("dark-mode");
+            if (themeBtn) themeBtn.textContent = "☀️ Giao diện Sáng";
+        } else {
+            document.body.classList.remove("dark-mode");
+            if (themeBtn) themeBtn.textContent = "🌙 Giao diện Tối";
+        }
+        localStorage.setItem("vldc2_theme", theme);
+    }
+    applyTheme(savedTheme);
+
+    if (themeBtn) {
+        themeBtn.addEventListener("click", function () {
+            const currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+            const nextTheme = currentTheme === "dark" ? "light" : "dark";
+            applyTheme(nextTheme);
+        });
+    }
+});
+</script>
+
+</body>
+</html>
